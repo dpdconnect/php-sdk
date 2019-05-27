@@ -1,0 +1,7 @@
+bin
+vendor
+docker-compose.yml
+tests/etc/parameters.yml
+phpunit.xml
+.php_cs.cache
+.idea
