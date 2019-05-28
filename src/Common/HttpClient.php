@@ -2,6 +2,7 @@
 
 namespace DpdConnect\Sdk\Common;
 
+use DpdConnect\Sdk\Client;
 use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Exceptions;
 use DpdConnect\Sdk\Exceptions\HttpException;
@@ -164,16 +165,19 @@ class HttpClient implements HttpClientInterface
 //            throw new Exceptions\AuthenticateException('Can not perform API Request without Authentication');
 //        }
 
+        list($webshopType, $webshopVersion, $pluginVersion) = $this->parseMeta();
+
         $baseHeaders = [
             'User-agent: ' . implode(' ', $this->userAgent),
             'Accept: application/json',
             'Content-Type: application/json',
             'Accept-Charset: utf-8',
-            'x-webshop-type: none',
-            'x-webshop-version: none',
-            'x-plugin-version: 1.0.0',
-            'x-php-version: 1.0.0',
-            'x-os: none'
+            'x-php-version: ' . $this->getPhpVersion(),
+            'x-webshop-type: ' . $webshopType,
+            'x-webshop-version: ' . $webshopVersion,
+            'x-plugin-version: ' . $pluginVersion,
+            'x-sdk-version: ' . Client::CLIENT_VERSION,
+            'x-os: ' . php_uname(),
         ];
 
         $baseHeaders = array_merge($baseHeaders, $headers, $this->headers);
@@ -236,5 +240,20 @@ class HttpClient implements HttpClientInterface
         }
 
         return 'PHP/' . PHP_VERSION_ID;
+    }
+
+    private function parseMeta()
+    {
+        if (!$this->meta) {
+            $this->meta = [];
+        }
+
+        $meta = $this->meta;
+
+        $webshopType = isset($meta['webshopType']) ? $meta['webshopType'] : 'unknown';
+        $webshopVersion = isset($meta['webshopVersion']) ? $meta['webshopVersion'] : 'unknown';
+        $pluginVersion = isset($meta['pluginVersion']) ? $meta['pluginVersion'] : 'unknown';
+
+        return [$webshopType, $webshopVersion, $pluginVersion];
     }
 }

@@ -21,13 +21,20 @@ class ClientBuilder implements ClientBuilderInterface
     protected $httpClient;
 
     /**
+     * @var array meta
+     */
+    private $meta;
+
+    /**
      * @param string $endpoint
      */
-    public function __construct($endpoint = null)
+    public function __construct($endpoint = null, $meta = null)
     {
         if (!is_null($endpoint)) {
             $this->endpoint = $endpoint;
         }
+
+        $this->meta = $meta;
     }
 
     /**
@@ -44,7 +51,7 @@ class ClientBuilder implements ClientBuilderInterface
     private function getHttpClient()
     {
         if (null === $this->httpClient) {
-            $this->httpClient = new HttpClient($this->endpoint);
+            $this->httpClient = new HttpClient($this->endpoint, $this->meta);
         }
 
         return $this->httpClient;
