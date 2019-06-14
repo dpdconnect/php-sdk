@@ -250,7 +250,7 @@ class Shipment extends BaseObject implements JsonSerializable
     /**
      * @return Customs
      */
-    public function getCustoms(): Customs
+    public function getCustoms()
     {
         return $this->customs;
     }

@@ -2,7 +2,7 @@
 
 namespace Dhl\Shipping\Webservice\Schema\Bcs;
 
-class CreateShipmentOrderRequest
+class ShipmentOrderRequest
 {
     /**
      * @var ShipmentOrderType $ShipmentOrder

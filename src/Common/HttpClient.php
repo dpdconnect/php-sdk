@@ -31,7 +31,7 @@ class HttpClient implements HttpClientInterface
     /**
      * @var Common\Authentication
      */
-    protected $Authentication;
+    protected $authentication;
 
     /**
      * @var int
@@ -41,7 +41,7 @@ class HttpClient implements HttpClientInterface
     /**
      * @var int
      */
-    private $connectionTimeout = 2;
+    private $connectionTimeout = 10;
 
     /**
      * @var array
@@ -54,12 +54,17 @@ class HttpClient implements HttpClientInterface
     private $httpOptions = [];
 
     /**
+     * @var array
+     */
+    private $meta;
+
+    /**
      * @param string $endpoint
      * @param int    $timeout           > 0
      * @param int    $connectionTimeout >= 0
      * @param array  $headers
      */
-    public function __construct($endpoint, $timeout = 10, $connectionTimeout = 2, $headers = [])
+    public function __construct($endpoint, $timeout = 10, $connectionTimeout = 10, $headers = [])
     {
         $this->endpoint = $endpoint;
 
@@ -86,6 +91,14 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
+     * @param array $meta
+     */
+    public function setMeta(array $meta = [])
+    {
+        $this->meta = $meta;
+    }
+
+    /**
      * @param string $userAgent
      */
     public function addUserAgentString($userAgent)
@@ -96,9 +109,9 @@ class HttpClient implements HttpClientInterface
     /**
      * @param Common\Authentication $Authentication
      */
-    public function setAuthentication(Common\Authentication $Authentication)
+    public function setAuthentication(Common\Authentication $authentication)
     {
-        $this->Authentication = $Authentication;
+        $this->authentication = $authentication;
     }
 
     /**
@@ -161,7 +174,7 @@ class HttpClient implements HttpClientInterface
     {
         $curl = curl_init();
 
-//        if ($this->Authentication === null) {
+//        if ($this->authentication === null) {
 //            throw new Exceptions\AuthenticateException('Can not perform API Request without Authentication');
 //        }
 

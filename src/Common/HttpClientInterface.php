@@ -8,6 +8,11 @@ use DpdConnect\Sdk\Exceptions;
 interface HttpClientInterface
 {
     /**
+     * @param array $meta
+     */
+    public function setMeta(array $meta = []);
+
+    /**
      * @param string $userAgent
      */
     public function addUserAgentString($userAgent);

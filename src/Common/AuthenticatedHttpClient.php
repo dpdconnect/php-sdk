@@ -67,7 +67,8 @@ class AuthenticatedHttpClient
                 ->setRefreshToken($tokens['refresh_token']);
 
             $headers[] =  sprintf('Authorization: Bearer %s', $this->authentication->getAccessToken());
-            $response =  $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
+            $response =  $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body)
+                                               ->setAuthentication($this->authentication);
         }
 
         return $response;
