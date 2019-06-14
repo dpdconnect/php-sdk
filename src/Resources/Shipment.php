@@ -65,6 +65,23 @@ class Shipment extends BaseResource
     }
 
     /**
+     * @param $object
+     * @param array $query
+     * @return ResourceClient|int
+     */
+    public function createAsync($object, $query = [])
+    {
+        if (is_null($object)) {
+            throw new \InvalidArgumentException('No shipment object given.');
+        }
+
+        $this->resourceClient->setResourceName($this->getUrl(true));
+        $response = $this->resourceClient->createResource($query, $object);
+
+        return $response;
+    }
+
+    /**
      * @param ShipmentOrderInterface[] $shipmentOrders
      *
      * @return ShipmentLabelInterface[]
@@ -80,7 +97,7 @@ class Shipment extends BaseResource
         }
 
         if (! empty($orders)) {
-            $labels = $this->createShipmentOrders($orders);
+            $labels = $this->createShipmentOrders($orders, false);
         } else {
             $labels = [];
         }
@@ -131,20 +148,20 @@ class Shipment extends BaseResource
      *
      * @return ShipmentLabelInterface[]
      */
-    public function createShipmentOrders(array $shipmentOrders, $async = false)
+    public function createShipmentOrders(array $shipmentOrders, $async = true)
     {
-        $shipmentOrders = array_map(
-            function ($shipmentOrder) {
-                return $shipmentOrder;
-//                return RequestMapper::mapShipmentOrder($shipmentOrder);
-            },
-            $shipmentOrders
-        );
+//        $shipmentOrders = array_map(
+//            function ($shipmentOrder) {
+//                return $shipmentOrder;
+////                return RequestMapper::mapShipmentOrder($shipmentOrder);
+//            },
+//            $shipmentOrders
+//        );
 
         $hipmentOrderRequest = RequestMapper::mapShipmentOrderRequest($shipmentOrders, $async);
 
         try {
-            $this->resourceClient->setResourceName($this->getUrl());
+            $this->resourceClient->setResourceName($this->getUrl($async));
             $response = $this->resourceClient->createResource([], $hipmentOrderRequest);
         } catch (Exception $e) {
             return ($this->setErrorByException($e));

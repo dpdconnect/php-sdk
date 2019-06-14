@@ -71,6 +71,14 @@ class Client
     }
 
     /**
+     * @return Authentication
+     */
+    public function getAuthentication()
+    {
+        return $this->authentication;
+    }
+
+    /**
      * @return Shipment
      */
     public function getShipment()

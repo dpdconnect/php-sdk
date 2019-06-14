@@ -18,9 +18,11 @@ class ResponseError implements \JsonSerializable
 
     const NOT_FOUND = 20;
 
-    const NOT_ENOUGH_CREDIT = 25;
+    const NOT_ENOUGH_CREDIT = 'Bad credentials';
 
     const CHAT_API_AUTH_ERROR = 1001;
+
+    const ACCESS_DENIED = 401;
 
     public $errors = [];
     public $validation = [];
@@ -43,8 +45,8 @@ class ResponseError implements \JsonSerializable
         if (!empty($body['errors'])) {
             foreach ($body['errors'] as $error) {
                 if (isset($error['code'])) {
-                    if ($error['code'] === self::NOT_ENOUGH_CREDIT) {
-                        throw new Exceptions\BalanceException($this->getExceptionMessage($error));
+                    if ($error['code'] === self::ACCESS_DENIED) {
+                        throw new Exceptions\AuthenticateException($this->getExceptionMessage($error));
                     } elseif ($error['code'] === self::REQUEST_NOT_ALLOWED) {
                         throw new Exceptions\AuthenticateException($this->getExceptionMessage($error));
                     } elseif ($error['code'] === self::CHAT_API_AUTH_ERROR) {
@@ -58,6 +60,18 @@ class ResponseError implements \JsonSerializable
 
             return;
         }
+
+        if (isset($body['code'])) {
+            if ($body['code'] === self::ACCESS_DENIED) {
+                throw new Exceptions\AuthenticateException($body['message']);
+            } elseif ($body['code'] === self::REQUEST_NOT_ALLOWED) {
+                throw new Exceptions\AuthenticateException($body['message']);
+            } elseif ($body['code'] === self::CHAT_API_AUTH_ERROR) {
+                throw new Exceptions\AuthenticateException($body['message']);
+            } else {
+            }
+        }
+
         if (!empty($body['message'])) {
             $this->errors[] = $body['message'];
         }
@@ -96,8 +110,7 @@ class ResponseError implements \JsonSerializable
             }
         }
 
-
-        return implode(', ', $errorDescriptions);
+        return print_r($errorDescriptions, true);
     }
 
     /**

@@ -28,10 +28,12 @@ class ClientBuilder implements ClientBuilderInterface
     /**
      * @param string $endpoint
      */
-    public function __construct($endpoint = null, $meta = null)
+    public function __construct($endpoint = null, $meta = [])
     {
-        if (!is_null($endpoint)) {
+        if (!is_null($endpoint) && $endpoint !== '') {
             $this->endpoint = $endpoint;
+        } else {
+            $this->endpoint = Client::ENDPOINT;
         }
 
         $this->meta = $meta;
@@ -51,7 +53,7 @@ class ClientBuilder implements ClientBuilderInterface
     private function getHttpClient()
     {
         if (null === $this->httpClient) {
-            $this->httpClient = new HttpClient($this->endpoint, $this->meta);
+            $this->httpClient = new HttpClient($this->endpoint);
         }
 
         return $this->httpClient;
@@ -64,7 +66,6 @@ class ClientBuilder implements ClientBuilderInterface
     public function setHttpClient(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
-
         return $this;
     }
 
@@ -124,6 +125,7 @@ class ClientBuilder implements ClientBuilderInterface
             $authenticationResource,
             $authentication
         );
+
 
         $resourceClient = new ResourceClient(
             $authenticatedHttpClient

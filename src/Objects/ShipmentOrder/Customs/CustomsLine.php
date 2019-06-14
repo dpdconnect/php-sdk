@@ -1,6 +1,6 @@
 <?php
 
-namespace DpdConnect\Sdk\Objects\Customs;
+namespace DpdConnect\Sdk\Objects\ShipmentOrder\Customs;
 
 use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\CustomsLineInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
@@ -47,4 +47,148 @@ class CustomsLine extends BaseObject implements JsonSerializable, CustomsLineInt
      * @var int
      */
     protected $customsLineNumber;
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return CustomsLine
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHarmonizedSystemCode()
+    {
+        return $this->harmonizedSystemCode;
+    }
+
+    /**
+     * @param string $harmonizedSystemCode
+     * @return CustomsLine
+     */
+    public function setHarmonizedSystemCode($harmonizedSystemCode)
+    {
+        $this->harmonizedSystemCode = $harmonizedSystemCode;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginCountry()
+    {
+        return $this->originCountry;
+    }
+
+    /**
+     * @param string $originCountry
+     * @return CustomsLine
+     */
+    public function setOriginCountry($originCountry)
+    {
+        $this->originCountry = $originCountry;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     * @return CustomsLine
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    /**
+     * @param float $totalAmount
+     * @return CustomsLine
+     */
+    public function setTotalAmount($totalAmount)
+    {
+        $this->totalAmount = $totalAmount;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNetWeight()
+    {
+        return $this->netWeight;
+    }
+
+    /**
+     * @param int $netWeight
+     * @return CustomsLine
+     */
+    public function setNetWeight($netWeight)
+    {
+        $this->netWeight = $netWeight;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGrossWeight()
+    {
+        return $this->grossWeight;
+    }
+
+    /**
+     * @param int $grossWeight
+     * @return CustomsLine
+     */
+    public function setGrossWeight($grossWeight)
+    {
+        $this->grossWeight = $grossWeight;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomsLineNumber()
+    {
+        return $this->customsLineNumber;
+    }
+
+    /**
+     * @param int $customsLineNumber
+     * @return CustomsLine
+     */
+    public function setCustomsLineNumber($customsLineNumber)
+    {
+        $this->customsLineNumber = $customsLineNumber;
+        return $this;
+    }
 }
