@@ -4,13 +4,14 @@ namespace DpdConnect\Sdk\Common;
 
 use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Exceptions;
+use DpdConnect\Sdk\Objects\MetaData;
 
 interface HttpClientInterface
 {
     /**
-     * @param array $meta
+     * @param MetaData $meta
      */
-    public function setMeta(array $meta = []);
+    public function setMeta($meta = null);
 
     /**
      * @param string $userAgent

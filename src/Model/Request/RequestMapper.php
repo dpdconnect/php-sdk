@@ -116,7 +116,7 @@ class RequestMapper
         foreach ($request['packages'] AS $i => $package) {
             $parcels[] = ObjectFactory::create(Parcel::class, [
                 'customerReferences' => [$request['order_shipment']->getOrder()->getIncrementId() . ' #' . $i],
-                'weight' => (int) round($package['params']['weight'] / count($request['packages'])),
+                'weight' => (int) round($request['order_shipment']->getOrder()->getWeight()),
             ]);
         }
         
@@ -189,10 +189,11 @@ class RequestMapper
     private static function getShipments($request)
     {
         return ObjectFactory::create(Shipment::class, [
-            'orderId'       => $request['orderId'],
+            'orderId'       => $request['order_shipment']->getOrderId(),
             'sendingDepot'      => '0522',
             'weight'            => (int) $request['package_weight'],
             'sender'            => self::getSender($request),
+            'notifications' => [],
             'receiver'          => self::getReceiver($request),
             'product'           => self::getProduct($request),
             'parcels'           => self::getParcels($request),
@@ -251,11 +252,12 @@ class RequestMapper
         $printOptions = self::getPrintOptions($request);
 
         $shipmentOrder = ObjectFactory::create(Shipment::class, [
-            'orderId'       => $request['order_shipment']->getOrder()->getIncrementId(),
+            'orderId'       => $request['order_shipment']->getOrderId(),
             'sendingDepot'  => '0522',
             'customerReferences' => [$request['order_shipment']->getOrder()->getIncrementId() . ' #1'],
             'weight'        => (int) ($request['package_weight'] * 100),
             'sender'        => self::getSender($request),
+            'notifications' => [],
             'receiver' => self::getReceiver($request),
             'product' => self::getProduct($request),
             'parcels' => self::getParcels($request),
@@ -263,8 +265,8 @@ class RequestMapper
         ]);
 
 //
-//        var_dump($request);
-//        die;
+    //    var_dump($request);
+    //    die;
 
 
         return $shipmentOrder;

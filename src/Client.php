@@ -8,6 +8,8 @@ use DpdConnect\Sdk\Common\ResourceClient;
 use DpdConnect\Sdk\Resources\Parcelshop;
 use DpdConnect\Sdk\Resources\Shipment;
 use DpdConnect\Sdk\Resources\Country;
+use DpdConnect\Sdk\Resources\Parcel;
+use DpdConnect\Sdk\Resources\Job;
 
 class Client
 {
@@ -34,6 +36,11 @@ class Client
      * @var Country
      */
     public $country;
+
+    /**
+     * @var Parcel
+     */
+    public $parcel;
 
     /**
      * @var HttpClient
@@ -68,6 +75,8 @@ class Client
         $this->shipment = new Shipment($this->resourceClient);
         $this->parcelshop = new Parcelshop($this->resourceClient);
         $this->country = new Country($this->resourceClient);
+        $this->parcel = new Parcel($this->resourceClient);
+        $this->job = new Job($this->resourceClient);
     }
 
     /**
@@ -100,5 +109,21 @@ class Client
     public function getCountries()
     {
         return $this->country;
+    }
+
+    /**
+     * @return Parcel
+     */
+    public function getParcel()
+    {
+        return $this->parcel;
+    }
+
+    /**
+     * @return Job
+     */
+    public function getJob()
+    {
+        return $this->job;
     }
 }
