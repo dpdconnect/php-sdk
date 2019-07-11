@@ -62,7 +62,7 @@ class ShipmentResponseParser implements ResponseParserInterface
 
                     return $labels;
                 } else {
-                    print_r($content);
+                    return $content;
                 }
             }
     }

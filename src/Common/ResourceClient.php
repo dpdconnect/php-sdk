@@ -86,7 +86,13 @@ class ResourceClient implements ResourceClientInterface
             return $response;
         }
 
-        return json_decode($response, true);
+        $decoded = json_decode($response, true);
+
+        if ($decoded === null) {
+            return $response;
+        }
+
+        return $decoded;
     }
 
     /**

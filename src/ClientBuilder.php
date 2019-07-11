@@ -28,7 +28,7 @@ class ClientBuilder implements ClientBuilderInterface
     /**
      * @param string $endpoint
      */
-    public function __construct($endpoint = null, $meta = [])
+    public function __construct($endpoint = null, $meta = null)
     {
         if (!is_null($endpoint) && $endpoint !== '') {
             $this->endpoint = $endpoint;
@@ -54,6 +54,7 @@ class ClientBuilder implements ClientBuilderInterface
     {
         if (null === $this->httpClient) {
             $this->httpClient = new HttpClient($this->endpoint);
+            $this->httpClient->setMeta($this->meta);
         }
 
         return $this->httpClient;
@@ -66,6 +67,7 @@ class ClientBuilder implements ClientBuilderInterface
     public function setHttpClient(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
+        $this->httpClient->setMeta($this->meta);
         return $this;
     }
 

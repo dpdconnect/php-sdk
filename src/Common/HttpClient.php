@@ -6,6 +6,8 @@ use DpdConnect\Sdk\Client;
 use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Exceptions;
 use DpdConnect\Sdk\Exceptions\HttpException;
+use DpdConnect\Sdk\Objects\MetaData;
+use DpdConnect\Sdk\Objects\ObjectFactory;
 use InvalidArgumentException;
 
 class HttpClient implements HttpClientInterface
@@ -54,7 +56,7 @@ class HttpClient implements HttpClientInterface
     private $httpOptions = [];
 
     /**
-     * @var array
+     * @var MetaData
      */
     private $meta;
 
@@ -91,9 +93,21 @@ class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @param array $meta
+     * @return Metadata
      */
-    public function setMeta(array $meta = [])
+    private function getMeta()
+    {
+        if (!$this->meta) {
+            $this->meta = ObjectFactory::create(MetaData::class, []);
+        }
+
+        return $this->meta;
+    }
+
+    /**
+     * @param MetaData $meta
+     */
+    public function setMeta($meta = null)
     {
         $this->meta = $meta;
     }
@@ -174,21 +188,15 @@ class HttpClient implements HttpClientInterface
     {
         $curl = curl_init();
 
-//        if ($this->authentication === null) {
-//            throw new Exceptions\AuthenticateException('Can not perform API Request without Authentication');
-//        }
-
-        list($webshopType, $webshopVersion, $pluginVersion) = $this->parseMeta();
-
         $baseHeaders = [
             'User-agent: ' . implode(' ', $this->userAgent),
             'Accept: application/json',
             'Content-Type: application/json',
             'Accept-Charset: utf-8',
             'x-php-version: ' . $this->getPhpVersion(),
-            'x-webshop-type: ' . $webshopType,
-            'x-webshop-version: ' . $webshopVersion,
-            'x-plugin-version: ' . $pluginVersion,
+            'x-webshop-type: ' . $this->getMeta()->getWebshopType(),
+            'x-webshop-version: ' . $this->getMeta()->getWebshopVersion(),
+            'x-plugin-version: ' . $this->getMeta()->getPluginVersion(),
             'x-sdk-version: ' . Client::CLIENT_VERSION,
             'x-os: ' . php_uname(),
         ];
@@ -253,20 +261,5 @@ class HttpClient implements HttpClientInterface
         }
 
         return 'PHP/' . PHP_VERSION_ID;
-    }
-
-    private function parseMeta()
-    {
-        if (!$this->meta) {
-            $this->meta = [];
-        }
-
-        $meta = $this->meta;
-
-        $webshopType = isset($meta['webshopType']) ? $meta['webshopType'] : 'unknown';
-        $webshopVersion = isset($meta['webshopVersion']) ? $meta['webshopVersion'] : 'unknown';
-        $pluginVersion = isset($meta['pluginVersion']) ? $meta['pluginVersion'] : 'unknown';
-
-        return [$webshopType, $webshopVersion, $pluginVersion];
     }
 }
