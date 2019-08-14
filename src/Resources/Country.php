@@ -36,11 +36,13 @@ class Country extends BaseResource
         }
 
         $this->resourceClient->setResourceName('api/connect/v1/countries');
-        $countries = $this->resourceClient->getResources($query);
-
-        $this->storeCachedList($countries, $query);
-
-        return $countries;
+        try {
+            $countries = $this->resourceClient->getResources($query);
+            $this->storeCachedList($countries, $query);
+            return $countries;
+        } catch (DpdException $e) {
+            throw $e;
+        }
     }
 
     private function getCachedList($query)

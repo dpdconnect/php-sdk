@@ -27,15 +27,11 @@ class ClientBuilder implements ClientBuilderInterface
 
     /**
      * @param string $endpoint
+     * @param null $meta
      */
     public function __construct($endpoint = null, $meta = null)
     {
-        if (!is_null($endpoint) && $endpoint !== '') {
-            $this->endpoint = $endpoint;
-        } else {
-            $this->endpoint = Client::ENDPOINT;
-        }
-
+        $this->endpoint = !empty($endpoint) ? $endpoint : Client::ENDPOINT;
         $this->meta = $meta;
     }
 

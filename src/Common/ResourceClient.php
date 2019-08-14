@@ -181,7 +181,6 @@ class ResourceClient implements ResourceClientInterface
      */
     public function parseResponse($status, $response, $headers = [])
     {
-        $errors = [];
         $validation = [];
         $response = @json_decode($response, true);
 
@@ -193,14 +192,14 @@ class ResourceClient implements ResourceClientInterface
             $validation = $this->parseValidationErrors($response['_embedded']);
         }
 
-        if (!empty($response['errors']) || count($errors) !== 0 || count($validation) !== 0) {
+        if (!empty($response['errors']) || count($validation) !== 0) {
             $responseError = new ResponseError($response, $validation);
             throw new RequestException($responseError);
         }
 
         return ObjectFactory::create(ResourceResponse::class, [
             'status'     => $status,
-            'errors'     => $errors,
+            'errors'     => [],
             'validation' => $validation,
             'headers'    => $headers,
             'content'    => $response

@@ -6,6 +6,7 @@ use DpdConnect\Sdk\Client;
 use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Exceptions;
 use DpdConnect\Sdk\Exceptions\HttpException;
+use DpdConnect\Sdk\Exceptions\ServerException;
 use DpdConnect\Sdk\Objects\MetaData;
 use DpdConnect\Sdk\Objects\ObjectFactory;
 use InvalidArgumentException;
@@ -38,12 +39,12 @@ class HttpClient implements HttpClientInterface
     /**
      * @var int
      */
-    private $timeout = 10;
+    private $timeout = 100;
 
     /**
      * @var int
      */
-    private $connectionTimeout = 10;
+    private $connectionTimeout = 100;
 
     /**
      * @var array
@@ -66,7 +67,7 @@ class HttpClient implements HttpClientInterface
      * @param int    $connectionTimeout >= 0
      * @param array  $headers
      */
-    public function __construct($endpoint, $timeout = 10, $connectionTimeout = 10, $headers = [])
+    public function __construct($endpoint, $timeout = 1000, $connectionTimeout = 1000, $headers = [])
     {
         $this->endpoint = $endpoint;
 
@@ -236,16 +237,20 @@ class HttpClient implements HttpClientInterface
         }
 
         $responseStatus = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
 
         // Split the header and body
         $parts = explode("\r\n\r\n", $response, 3);
+        switch ($responseStatus) {
+            case 500:
+                throw new ServerException($parts[1]);
+        }
+
         if (in_array($parts[0], ['HTTP/1.1 200 OK', 'HTTP/1.1 100 Continue'])) {
             list($responseHeader, $responseBody) = [$parts[1], $parts[2]];
         } else {
             list($responseHeader, $responseBody) = [$parts[0], $parts[1]];
         }
-
-        curl_close($curl);
 
         return [$responseStatus, $responseBody];
     }
