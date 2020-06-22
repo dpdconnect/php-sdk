@@ -20,6 +20,11 @@ class Authentication
     protected $jwtToken;
 
     /**
+     * @var callable
+     */
+    public $tokenUpdateCallback;
+
+    /**
      * @param $username
      * @param $password
      * @return \DpdConnect\Sdk\Security\Authentication
@@ -76,6 +81,17 @@ class Authentication
     public function setJwtToken($jwtToken)
     {
         $this->jwtToken = $jwtToken;
+
+        return $this;
+    }
+
+    /**
+     * @param callable $callable
+     * @return $this
+     */
+    public function setTokenUpdateCallback(callable $callable)
+    {
+        $this->tokenUpdateCallback = $callable;
 
         return $this;
     }

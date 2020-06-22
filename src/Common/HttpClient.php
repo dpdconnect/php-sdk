@@ -6,6 +6,7 @@ use DpdConnect\Sdk\Client;
 use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Exceptions;
 use DpdConnect\Sdk\Exceptions\HttpException;
+use DpdConnect\Sdk\Exceptions\AuthenticateException;
 use DpdConnect\Sdk\Exceptions\ServerException;
 use DpdConnect\Sdk\Objects\MetaData;
 use DpdConnect\Sdk\Objects\ObjectFactory;
@@ -244,6 +245,8 @@ class HttpClient implements HttpClientInterface
         switch ($responseStatus) {
             case 500:
                 throw new ServerException($parts[1]);
+            case 401:
+                throw new AuthenticateException($parts[1]);
         }
 
         if (in_array($parts[0], ['HTTP/1.1 200 OK', 'HTTP/1.1 100 Continue'])) {
