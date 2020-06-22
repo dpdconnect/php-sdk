@@ -73,7 +73,7 @@ class ClientBuilder implements ClientBuilderInterface
      * @param string $username Username to use for the authentication
      * @param string $password Password associated to the username
      *
-     * @return ClientInterface
+     * @return Client
      */
     public function buildAuthenticatedByPassword($username, $password)
     {
@@ -87,7 +87,7 @@ class ClientBuilder implements ClientBuilderInterface
      *
      * @param string $jwtToken     JWT tokken for authentication
      *
-     * @return ClientInterface
+     * @return Client
      */
     public function buildAuthenticatedByJwtToken($jwtToken)
     {
@@ -99,7 +99,7 @@ class ClientBuilder implements ClientBuilderInterface
     /**
      * @param Authentication $authentication
      *
-     * @return ClientInterface
+     * @return Client
      */
     protected function buildAuthenticatedClient(Authentication $authentication)
     {

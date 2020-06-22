@@ -49,26 +49,36 @@ class AuthenticatedHttpClient
 
             $this->authentication
                 ->setJwtToken($tokens['token']);
+            if (is_callable($this->authentication->tokenUpdateCallback)) {
+                call_user_func($this->authentication->tokenUpdateCallback, $this->authentication->getJwtToken());
+            }
         }
 
         try {
-            $headers[] =  sprintf('Authorization: Bearer %s', $this->authentication->getJwtToken());
+            $headers[] = sprintf('Authorization: Bearer %s', $this->authentication->getJwtToken());
 
             $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
         } catch (AuthenticateException $e) {
-            $tokens = $this->authenticationResource->authenticateByRefreshToken(
-                $this->authentication->getClientId(),
-                $this->authentication->getSecret(),
-                $this->authentication->getRefreshToken()
-            );
 
-            $this->authentication
-                ->setAccessToken($tokens['access_token'])
-                ->setRefreshToken($tokens['refresh_token']);
+            try {
+                $token = $this->authenticationResource->authenticateByPassword(
+                    $this->authentication->getUsername(),
+                    $this->authentication->getPassword()
+                );
 
-            $headers[] =  sprintf('Authorization: Bearer %s', $this->authentication->getAccessToken());
-            $response =  $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body)
-                                               ->setAuthentication($this->authentication);
+                $this->authentication
+                    ->setJwtToken($token['token']);
+                if (is_callable($this->authentication->tokenUpdateCallback)) {
+                    call_user_func($this->authentication->tokenUpdateCallback, $this->authentication->getJwtToken());
+                }
+
+                // Since the Authorization Bearer always is the last added item, we overwrite it like this
+                $headers[count($headers) - 1] = sprintf('Authorization: Bearer %s', $this->authentication->getJwtToken());
+                $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
+            } catch (AuthenticateException $exception) {
+                throw $exception;
+            }
+
         }
 
         return $response;
