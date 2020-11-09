@@ -60,6 +60,7 @@ class Country extends BaseResource
 
     private function storeCachedList($countries, $query)
     {
+        if (is_array($countries)) {
         if (!file_exists(sys_get_temp_dir() . '/dpd/')) {
             mkdir(sys_get_temp_dir() . '/dpd/');
         }
@@ -68,5 +69,6 @@ class Country extends BaseResource
         $handle = fopen($filename, "w");
         fwrite($handle, serialize($countries));
         fclose($handle);
+    }
     }
 }
