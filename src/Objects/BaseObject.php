@@ -38,14 +38,15 @@ class BaseObject implements JsonSerializable
     }
 
     /**
-     * @return string[]
+     * @return array
      */
     public function jsonSerialize()
     {
         $properties = get_object_vars($this);
-        $properties = array_filter($properties, function ($value) {
-            return ! empty($value);
+        $properties = array_filter($properties, static function ($value) {
+            return $value === false || !empty($value);
         });
+
         return $properties;
     }
 }
