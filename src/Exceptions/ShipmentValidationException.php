@@ -2,8 +2,11 @@
 
 namespace DpdConnect\Sdk\Exceptions;
 
-use Exception;
-
-class ShipmentValidationException extends Exception
+/**
+ * Class ShipmentValidationException
+ *
+ * @package DpdConnect\Sdk\Exceptions
+ */
+class ShipmentValidationException extends DpdException
 {
 }

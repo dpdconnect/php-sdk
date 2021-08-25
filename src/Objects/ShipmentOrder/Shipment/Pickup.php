@@ -5,7 +5,12 @@ namespace DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 
-class Pickup extends BaseObject implements JsonSerializable, PickupInterface
+/**
+ * Class Pickup
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder\Shipment
+ */
+class Pickup extends BaseObject implements JsonSerializable
 {
     /**
      * @var mixed

@@ -6,10 +6,17 @@ use DateTimeInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Contact\Receiver;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Contact\Sender;
+use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment\Customs;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment\Notification;
+use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment\Parcel;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment\Product;
 use JsonSerializable;
 
+/**
+ * Class Shipment
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder
+ */
 class Shipment extends BaseObject implements JsonSerializable
 {
     /**
@@ -77,11 +84,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param mixed $sendingDepot
+     *
      * @return Shipment
      */
     public function setSendingDepot($sendingDepot)
     {
         $this->sendingDepot = $sendingDepot;
+
         return $this;
     }
 
@@ -95,11 +104,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param mixed $volume
+     *
      * @return Shipment
      */
     public function setVolume($volume)
     {
         $this->volume = $volume;
+
         return $this;
     }
 
@@ -113,11 +124,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param int|null $weight
+     *
      * @return Shipment
      */
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -131,11 +144,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param string[] $customerReferences
+     *
      * @return Shipment
      */
     public function setCustomerReferences(array $customerReferences)
     {
         $this->customerReferences = $customerReferences;
+
         return $this;
     }
 
@@ -149,11 +164,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param DateTimeInterface|null $expectedSendingDateTime
+     *
      * @return Shipment
      */
     public function setExpectedSendingDateTime($expectedSendingDateTime)
     {
         $this->expectedSendingDateTime = $expectedSendingDateTime;
+
         return $this;
     }
 
@@ -167,11 +184,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Sender $sender
+     *
      * @return Shipment
      */
     public function setSender(Sender $sender)
     {
         $this->sender = $sender;
+
         return $this;
     }
 
@@ -185,11 +204,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Receiver $receiver
+     *
      * @return Shipment
      */
     public function setReceiver(Receiver $receiver)
     {
         $this->receiver = $receiver;
+
         return $this;
     }
 
@@ -203,11 +224,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Product $product
+     *
      * @return Shipment
      */
     public function setProduct(Product $product)
     {
         $this->product = $product;
+
         return $this;
     }
 
@@ -221,11 +244,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Parcel[] $parcels
+     *
      * @return Shipment
      */
     public function setParcels(array $parcels)
     {
         $this->parcels = $parcels;
+
         return $this;
     }
 
@@ -239,11 +264,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Notification[] $notifications
+     *
      * @return Shipment
      */
     public function setNotifications(array $notifications)
     {
         $this->notifications = $notifications;
+
         return $this;
     }
 
@@ -257,11 +284,13 @@ class Shipment extends BaseObject implements JsonSerializable
 
     /**
      * @param Customs $customs
+     *
      * @return Shipment
      */
     public function setCustoms(Customs $customs)
     {
         $this->customs = $customs;
+
         return $this;
     }
 }

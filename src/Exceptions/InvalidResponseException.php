@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Exceptions;
 
 use Exception;
 
-class InvalidResponseException extends Exception
+/**
+ * Class InvalidResponseException
+ *
+ * @package DpdConnect\Sdk\Exceptions
+ */
+class InvalidResponseException extends ApiException
 {
 }

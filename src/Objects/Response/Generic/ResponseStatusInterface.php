@@ -2,11 +2,16 @@
 
 namespace DpdConnect\Sdk\Objects\Response\Generic;
 
+/**
+ * Interface ResponseStatusInterface
+ *
+ * @package DpdConnect\Sdk\Objects\Response\Generic
+ */
 interface ResponseStatusInterface
 {
-    const STATUS_SUCCESS         = 'SUCCESS';
-    const STATUS_PARTIAL         = 'PARTIALLY FAILED';
-    const STATUS_FAILURE         = 'FAILED';
+    const STATUS_SUCCESS = 'SUCCESS';
+    const STATUS_PARTIAL = 'PARTIALLY FAILED';
+    const STATUS_FAILURE = 'FAILED';
 
     /**
      * @return string

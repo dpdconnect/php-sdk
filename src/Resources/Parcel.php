@@ -2,10 +2,8 @@
 
 namespace DpdConnect\Sdk\Resources;
 
-use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Common\ResourceClient;
 use DpdConnect\Sdk\Exceptions\DpdException;
-use DpdConnect\Sdk\Objects;
 use InvalidArgumentException;
 
 /**
@@ -16,35 +14,40 @@ class Parcel extends BaseResource
     /**
      * @param ResourceClient $resourceClient
      */
-    public function __construct(
-        ResourceClient $resourceClient
-    ) {
+    public function __construct($resourceClient)
+    {
         parent::__construct($resourceClient);
     }
 
     /**
      * @param array $query
+     *
      * @return array
      * @throws DpdException
      */
     public function getStatus($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('No parcel id provided.');
+            throw new InvalidArgumentException('No parcel id provided.');
         }
 
-        $this->resourceClient->setResourceName('api/connect/v1/parcel/status/' . $id);
+        $this->resourceClient->setResourceName('api/connect/v1/parcel/status/'.$id);
 
         return $this->resourceClient->getResource();
     }
 
+    /**
+     * @param $id
+     *
+     * @return array|mixed
+     */
     public function getLabel($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('No parcel id provided.');
+            throw new InvalidArgumentException('No parcel id provided.');
         }
 
-        $this->resourceClient->setResourceName('api/connect/v1/parcel/label/' . $id);
+        $this->resourceClient->setResourceName('api/connect/v1/parcel/label/'.$id);
 
         return $this->resourceClient->getResource();
     }

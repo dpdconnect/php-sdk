@@ -5,9 +5,15 @@ namespace DpdConnect\Sdk\Resources;
 use DpdConnect\Sdk\Common\AuthenticationResourceInterface;
 use DpdConnect\Sdk\Common\HttpClient;
 use DpdConnect\Sdk\Common\ResponseError;
+use DpdConnect\Sdk\Exceptions\AuthenticateException;
 use DpdConnect\Sdk\Exceptions\RequestException;
 use DpdConnect\Sdk\Exceptions\ServerException;
 
+/**
+ * Class Authentication
+ *
+ * @package DpdConnect\Sdk\Resources
+ */
 class Authentication implements AuthenticationResourceInterface
 {
     const RESOURCE_URI_AUTH = 'auth/login';
@@ -15,7 +21,7 @@ class Authentication implements AuthenticationResourceInterface
     /**
      * @param HttpClient $HttpClient
      */
-    public function __construct(HttpClient $httpClient)
+    public function __construct($httpClient)
     {
         $this->httpClient = $httpClient;
     }
@@ -26,8 +32,9 @@ class Authentication implements AuthenticationResourceInterface
     public function authenticateByPassword($username, $password)
     {
         $requestBody = [
-            'username'   => $username,
-            'password'   => $password,
+            'username' => $username,
+            'password' => $password,
+            'scope' => 'private',
         ];
 
         return $this->authenticate($requestBody);
@@ -41,13 +48,11 @@ class Authentication implements AuthenticationResourceInterface
      * @return array returns the body of the response containing access token and refresh token
      * @throws RequestException
      * @throws ServerException
-     * @throws \DpdConnect\Sdk\Exceptions\AuthenticateException
-     * @throws \DpdConnect\Sdk\Exceptions\HttpException
      */
     protected function authenticate($requestBody)
     {
         $headers = [
-            'Content-Type'  => 'application/json'
+            'Content-Type' => 'application/json',
         ];
 
         $response = $this->httpClient->sendRequest(
@@ -63,10 +68,11 @@ class Authentication implements AuthenticationResourceInterface
 
     /**
      * @param $response
+     *
      * @return array
      *
      * @throws RequestException
-     * @throws ServerException
+     * @throws ServerException|AuthenticateException
      */
     public function processRequest($response)
     {

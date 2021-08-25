@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Api\Data\ShipmentOrder\Contact;
 
 use DpdConnect\Sdk\Objects\ShipmentOrder\Contact\Address;
 
+/**
+ * Interface AddressInterface
+ *
+ * @package DpdConnect\Sdk\Api\Data\ShipmentOrder\Contact
+ */
 interface AddressInterface
 {
     /**
@@ -13,6 +18,7 @@ interface AddressInterface
 
     /**
      * @param string $companyName
+     *
      * @return Address
      */
     public function setCompanyName($companyName);
@@ -24,6 +30,7 @@ interface AddressInterface
 
     /**
      * @param string $contactPerson
+     *
      * @return Address
      */
     public function setContactPerson($contactPerson);
@@ -35,6 +42,7 @@ interface AddressInterface
 
     /**
      * @param string $name1
+     *
      * @return Address
      */
     public function setName1($name1);
@@ -46,6 +54,7 @@ interface AddressInterface
 
     /**
      * @param string $name2
+     *
      * @return Address
      */
     public function setName2($name2);
@@ -57,6 +66,7 @@ interface AddressInterface
 
     /**
      * @param string $street
+     *
      * @return Address
      */
     public function setStreet($street);
@@ -68,6 +78,7 @@ interface AddressInterface
 
     /**
      * @param string $houseNumber
+     *
      * @return Address
      */
     public function setHouseNumber($houseNumber);
@@ -79,6 +90,7 @@ interface AddressInterface
 
     /**
      * @param string $postalCode
+     *
      * @return Address
      */
     public function setPostalCode($postalCode);
@@ -90,6 +102,7 @@ interface AddressInterface
 
     /**
      * @param string $city
+     *
      * @return Address
      */
     public function setCity($city);
@@ -101,6 +114,7 @@ interface AddressInterface
 
     /**
      * @param string $state
+     *
      * @return Address
      */
     public function setState($state);
@@ -112,6 +126,7 @@ interface AddressInterface
 
     /**
      * @param string $country
+     *
      * @return Address
      */
     public function setCountry($country);
@@ -123,6 +138,7 @@ interface AddressInterface
 
     /**
      * @param bool $commercialAddress
+     *
      * @return Address
      */
     public function setCommercialAddress($commercialAddress);
@@ -134,6 +150,7 @@ interface AddressInterface
 
     /**
      * @param string $building
+     *
      * @return Address
      */
     public function setBuilding($building);
@@ -145,6 +162,7 @@ interface AddressInterface
 
     /**
      * @param string $floor
+     *
      * @return Address
      */
     public function setFloor($floor);
@@ -156,6 +174,7 @@ interface AddressInterface
 
     /**
      * @param string $department
+     *
      * @return Address
      */
     public function setDepartment($department);
@@ -167,6 +186,7 @@ interface AddressInterface
 
     /**
      * @param string $doorCode
+     *
      * @return Address
      */
     public function setDoorCode($doorCode);
@@ -178,6 +198,7 @@ interface AddressInterface
 
     /**
      * @param int $globalLocationNumber
+     *
      * @return Address
      */
     public function setGlobalLocationNumber($globalLocationNumber);
@@ -189,6 +210,7 @@ interface AddressInterface
 
     /**
      * @param string $phoneNumber
+     *
      * @return Address
      */
     public function setPhoneNumber($phoneNumber);
@@ -200,6 +222,7 @@ interface AddressInterface
 
     /**
      * @param string $faxNumber
+     *
      * @return Address
      */
     public function setFaxNumber($faxNumber);
@@ -211,6 +234,7 @@ interface AddressInterface
 
     /**
      * @param string $email
+     *
      * @return Address
      */
     public function setEmail($email);
@@ -222,6 +246,7 @@ interface AddressInterface
 
     /**
      * @param string $website
+     *
      * @return Address
      */
     public function setWebsite($website);
@@ -233,6 +258,7 @@ interface AddressInterface
 
     /**
      * @param string $eoriNumber
+     *
      * @return Address
      */
     public function setEoriNumber($eoriNumber);
@@ -244,6 +270,7 @@ interface AddressInterface
 
     /**
      * @param string $vatNumber
+     *
      * @return Address
      */
     public function setVatNumber($vatNumber);
@@ -255,6 +282,7 @@ interface AddressInterface
 
     /**
      * @param string $comment
+     *
      * @return Address
      */
     public function setComment($comment);

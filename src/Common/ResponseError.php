@@ -2,29 +2,33 @@
 
 namespace DpdConnect\Sdk\Common;
 
-use DpdConnect\Sdk\Exceptions;
+use DpdConnect\Sdk\Exceptions\AuthenticateException;
 
+/**
+ * Class ResponseError
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 class ResponseError implements \JsonSerializable
 {
     const EXCEPTION_MESSAGE = 'Got error response from the server: %s';
-
     const SUCCESS = 1;
-
     const REQUEST_NOT_ALLOWED = 2;
-
     const MISSING_PARAMS = 9;
-
     const INVALID_PARAMS = 10;
-
     const NOT_FOUND = 20;
-
     const NOT_ENOUGH_CREDIT = 'Bad credentials';
-
     const CHAT_API_AUTH_ERROR = 1001;
-
     const ACCESS_DENIED = 401;
 
+    /**
+     * @var array
+     */
     public $errors = [];
+
+    /**
+     * @var array|mixed
+     */
     public $validation = [];
 
     /**
@@ -33,8 +37,7 @@ class ResponseError implements \JsonSerializable
      *
      * @param $body
      *
-     * @throws Exceptions\AuthenticateException
-     * @throws Exceptions\BalanceException
+     * @throws AuthenticateException
      */
     public function __construct($body, $validation = [])
     {
@@ -46,12 +49,11 @@ class ResponseError implements \JsonSerializable
             foreach ($body['errors'] as $error) {
                 if (isset($error['code'])) {
                     if ($error['code'] === self::ACCESS_DENIED) {
-                        throw new Exceptions\AuthenticateException($this->getExceptionMessage($error));
+                        throw new AuthenticateException($this->getExceptionMessage($error));
                     } elseif ($error['code'] === self::REQUEST_NOT_ALLOWED) {
-                        throw new Exceptions\AuthenticateException($this->getExceptionMessage($error));
+                        throw new AuthenticateException($this->getExceptionMessage($error));
                     } elseif ($error['code'] === self::CHAT_API_AUTH_ERROR) {
-                        throw new Exceptions\AuthenticateException($this->getExceptionMessage($error));
-                    } else {
+                        throw new AuthenticateException($this->getExceptionMessage($error));
                     }
                 }
 
@@ -63,12 +65,11 @@ class ResponseError implements \JsonSerializable
 
         if (isset($body['code'])) {
             if ($body['code'] === self::ACCESS_DENIED) {
-                throw new Exceptions\AuthenticateException($body['message']);
+                throw new AuthenticateException($body['message']);
             } elseif ($body['code'] === self::REQUEST_NOT_ALLOWED) {
-                throw new Exceptions\AuthenticateException($body['message']);
+                throw new AuthenticateException($body['message']);
             } elseif ($body['code'] === self::CHAT_API_AUTH_ERROR) {
-                throw new Exceptions\AuthenticateException($body['message']);
-            } else {
+                throw new AuthenticateException($body['message']);
             }
         }
 
@@ -119,9 +120,13 @@ class ResponseError implements \JsonSerializable
     public function jsonSerialize()
     {
         $properties = get_object_vars($this);
-        $properties = array_filter($properties, function ($value) {
-            return ! empty($value);
-        });
+        $properties = array_filter(
+            $properties,
+            function ($value) {
+                return !empty($value);
+            }
+        );
+
         return $properties;
     }
 }

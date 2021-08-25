@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Objects;
 
 use DpdConnect\Sdk\Api\Data\Response\ItemStatusInterface;
 
+/**
+ * Class ItemStatus
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ItemStatus extends ResponseStatus implements ItemStatusInterface
 {
     /**

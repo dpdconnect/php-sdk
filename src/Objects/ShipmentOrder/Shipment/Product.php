@@ -6,6 +6,11 @@ use DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment\ProductInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 
+/**
+ * Class Product
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder\Shipment
+ */
 class Product extends BaseObject implements JsonSerializable, ProductInterface
 {
     /**
@@ -34,7 +39,7 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
     protected $parcelShopId;
 
     /**
-     * @var ?PickupDTO
+     * @var ?Pickup
      */
     protected $pickup;
 
@@ -48,11 +53,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param string $productCode
+     *
      * @return Product
      */
     public function setProductCode($productCode)
     {
         $this->productCode = $productCode;
+
         return $this;
     }
 
@@ -66,11 +73,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param bool|null $homeDelivery
+     *
      * @return Product
      */
     public function setHomeDelivery($homeDelivery)
     {
         $this->homeDelivery = $homeDelivery;
+
         return $this;
     }
 
@@ -84,11 +93,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param bool|null $saturdayDelivery
+     *
      * @return Product
      */
     public function setSaturdayDelivery($saturdayDelivery)
     {
         $this->saturdayDelivery = $saturdayDelivery;
+
         return $this;
     }
 
@@ -102,11 +113,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param bool|null $tyres
+     *
      * @return Product
      */
     public function setTyres($tyres)
     {
         $this->tyres = $tyres;
+
         return $this;
     }
 
@@ -120,11 +133,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param string|null $parcelShopId
+     *
      * @return Product
      */
     public function setParcelShopId($parcelShopId)
     {
         $this->parcelShopId = $parcelShopId;
+
         return $this;
     }
 
@@ -138,11 +153,13 @@ class Product extends BaseObject implements JsonSerializable, ProductInterface
 
     /**
      * @param mixed $pickup
+     *
      * @return Product
      */
     public function setPickup($pickup)
     {
         $this->pickup = $pickup;
+
         return $this;
     }
 }

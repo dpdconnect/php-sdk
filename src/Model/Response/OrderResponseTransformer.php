@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Model\Response;
 
 use DpdConnect\Sdk\Exceptions\InvalidResponseException;
 
+/**
+ * Class OrderResponseTransformer
+ *
+ * @package DpdConnect\Sdk\Model\Response
+ */
 class OrderResponseTransformer
 {
     /**
@@ -15,15 +20,32 @@ class OrderResponseTransformer
     public static function parseDetail($map, $detail)
     {
         $stringPath = 'body.shipments[';
+
         return self::parse($map, $detail, $stringPath);
     }
 
+    /**
+     * @param $map
+     * @param $detail
+     *
+     * @return array
+     * @throws InvalidResponseException
+     */
     public static function parseAsyncDetail($map, $detail)
     {
         $stringPath = 'body.label.shipments[';
+
         return self::parse($map, $detail, $stringPath);
     }
 
+    /**
+     * @param $map
+     * @param $detail
+     * @param $stringPath
+     *
+     * @return array
+     * @throws InvalidResponseException
+     */
     private static function parse($map, $detail, $stringPath)
     {
         if (!isset($detail['dataPath'])) {

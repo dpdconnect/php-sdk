@@ -2,51 +2,29 @@
 
 namespace DpdConnect\Sdk\Objects\Response;
 
+use ArrayIterator;
 use DpdConnect\Sdk\Api\ShipmentLabelInterface;
+use DpdConnect\Sdk\Exceptions\ApiException;
 use DpdConnect\Sdk\Objects\Response\CreateShipment\LabelInterface;
 use DpdConnect\Sdk\Objects\Response\Generic\ResponseStatus;
 use DpdConnect\Sdk\Objects\Response\Generic\ResponseStatusInterface;
+use Exception;
 
-class ShipmentResponseCollection extends \ArrayIterator implements ShipmentResponseInterface
+/**
+ * Class ShipmentResponseCollection
+ *
+ * @package DpdConnect\Sdk\Objects\Response
+ */
+class ShipmentResponseCollection extends ArrayIterator implements ShipmentResponseInterface
 {
-    const MSG_STATUS_CREATED           = 'Shipping labels were created successfully.';
+    const MSG_STATUS_CREATED = 'Shipping labels were created successfully.';
     const MSG_STATUS_PARTIALLY_CREATED = 'Some shipping labels could not be created: %s';
-    const MSG_STATUS_NOT_CREATED       = 'Shipping labels could not be created: %s';
+    const MSG_STATUS_NOT_CREATED = 'Shipping labels could not be created: %s';
 
     /**
      * @var ResponseStatusInterface
      */
     private $status;
-
-    /**
-     * @param LabelInterface[] $labels
-     * @param string[]         $invalidOrders
-     *
-     * @return string[]
-     */
-    private static function getStatusMessages(array $labels, array $invalidOrders = [])
-    {
-        $messages = [];
-
-//        foreach ($labels as $label) {
-//            $messages[] = sprintf(
-//                '%s: %s | %s',
-//                $label->getSequenceNumber(),
-//                $label->getStatus()->getText(),
-//                $label->getStatus()->getMessage()
-//            );
-//        }
-////
-//        foreach ($invalidOrders as $sequenceNumber => $errorMessage) {
-//            $messages[] = sprintf(
-//                '%s: %s',
-//                $sequenceNumber,
-//                $errorMessage
-//            );
-//        }
-
-        return $messages;
-    }
 
     /**
      * Infer overall operation status from single items' status.
@@ -63,7 +41,7 @@ class ShipmentResponseCollection extends \ArrayIterator implements ShipmentRespo
     private static function getResponseStatus(array $labels, array $invalidOrders = [])
     {
         if (count($labels) === 0) {
-            $messages = self::getStatusMessages($labels, $invalidOrders);
+            $messages = [];
             $responseStatus = new ResponseStatus(
                 ResponseStatusInterface::STATUS_FAILURE,
                 'Error',
@@ -73,12 +51,18 @@ class ShipmentResponseCollection extends \ArrayIterator implements ShipmentRespo
             return $responseStatus;
         }
 
-        $createdLabels = array_filter($labels, function (ShipmentLabelInterface $label) {
-            return ($label->getStatus() === ResponseStatusInterface::STATUS_SUCCESS);
-        });
-        $rejectedLabels = array_filter($labels, function (ShipmentLabelInterface $label) {
-            return ($label->getStatus() === ResponseStatusInterface::STATUS_FAILURE);
-        });
+        $createdLabels = array_filter(
+            $labels,
+            function (ShipmentLabelInterface $label) {
+                return ($label->getStatus() === ResponseStatusInterface::STATUS_SUCCESS);
+            }
+        );
+        $rejectedLabels = array_filter(
+            $labels,
+            function (ShipmentLabelInterface $label) {
+                return ($label->getStatus() === ResponseStatusInterface::STATUS_FAILURE);
+            }
+        );
 
         if (empty($rejectedLabels) && empty($invalidOrders)) {
             $responseStatus = new ResponseStatus(
@@ -87,16 +71,16 @@ class ShipmentResponseCollection extends \ArrayIterator implements ShipmentRespo
                 self::MSG_STATUS_CREATED
             );
         } elseif (empty($createdLabels)) {
-            $messages = self::getStatusMessages($rejectedLabels, $invalidOrders);
+            $messages = [];
             $responseStatus = new ResponseStatus(
                 ResponseStatusInterface::STATUS_FAILURE,
                 'Error',
                 sprintf(self::MSG_STATUS_NOT_CREATED, implode("\n", $messages))
             );
         } else {
-            $messages = self::getStatusMessages($rejectedLabels, $invalidOrders);
+            $messages = [];
             $responseStatus = new ResponseStatus(
-                ResponseStatusInterface::STATUS_PARTIAL_SUCCESS,
+                ResponseStatusInterface::STATUS_PARTIAL,
                 'Warning',
                 sprintf(self::MSG_STATUS_PARTIALLY_CREATED, implode("\n", $messages))
             );
@@ -121,6 +105,7 @@ class ShipmentResponseCollection extends \ArrayIterator implements ShipmentRespo
     public function setStatus(ResponseStatusInterface $status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -160,15 +145,15 @@ class ShipmentResponseCollection extends \ArrayIterator implements ShipmentRespo
 
     /**
      * @param ApiException $exception
-     * @param string[]            $invalidRequests
+     * @param string[]     $invalidRequests
      *
      * @return ShipmentResponseCollection
      */
-    public static function fromError(\Exception $exception, array $invalidRequests)
+    public static function fromError(Exception $exception, array $invalidRequests)
     {
         $collection = new self([]);
 
-        $messages = self::getStatusMessages([], $invalidRequests);
+        $messages = [];
         if ($exception->getPrevious()) {
             $messages[] = $exception->getPrevious()->getMessage();
         } else {

@@ -9,5 +9,4 @@ namespace DpdConnect\Sdk\Exceptions;
  */
 class ServerException extends DpdException
 {
-
 }

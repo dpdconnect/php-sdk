@@ -2,13 +2,16 @@
 
 namespace DpdConnect\Sdk\Common;
 
+/**
+ * Interface AuthenticationResourceInterface
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 interface AuthenticationResourceInterface
 {
     /**
      * Authenticates with the password grant type.
      *
-     * @param string $clientId
-     * @param string $secret
      * @param string $username
      * @param string $password
      *

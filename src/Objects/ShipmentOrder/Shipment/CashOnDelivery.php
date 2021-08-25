@@ -6,6 +6,11 @@ use DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment\CashOnDeliveryInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 
+/**
+ * Class CashOnDelivery
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder\Shipment
+ */
 class CashOnDelivery extends BaseObject implements JsonSerializable, CashOnDeliveryInterface
 {
     /**

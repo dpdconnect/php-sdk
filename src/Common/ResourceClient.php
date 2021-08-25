@@ -8,6 +8,11 @@ use DpdConnect\Sdk\Exceptions\ServerException;
 use DpdConnect\Sdk\Objects\ObjectFactory;
 use DpdConnect\Sdk\Objects\ResourceResponse;
 
+/**
+ * Class ResourceClient
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 class ResourceClient implements ResourceClientInterface
 {
     /**
@@ -44,11 +49,13 @@ class ResourceClient implements ResourceClientInterface
 
     /**
      * @param string $resourceName
+     *
      * @return ResourceClient
      */
     public function setResourceName($resourceName)
     {
         $this->resourceName = $resourceName;
+
         return $this;
     }
 
@@ -62,11 +69,13 @@ class ResourceClient implements ResourceClientInterface
 
     /**
      * @param object $object
+     *
      * @return ResourceClient
      */
     public function setObject($object)
     {
         $this->object = $object;
+
         return $this;
     }
 
@@ -134,6 +143,7 @@ class ResourceClient implements ResourceClientInterface
 
     /**
      * @param array $query
+     *
      * @return array|int
      */
     public function deleteResource(array $query = [])
@@ -145,6 +155,7 @@ class ResourceClient implements ResourceClientInterface
 
     /**
      * @param $items
+     *
      * @return array
      */
     private function parseValidationErrors($items)
@@ -153,26 +164,30 @@ class ResourceClient implements ResourceClientInterface
 
         if (count($items) > 0) {
             $items = array_shift($items);
-            array_walk($items, function ($item) use (&$errors) {
-                $field = function ($item) {
-                    if (key_exists('dataPath', $item)) {
-                        return str_replace('body.', '', $item['dataPath']);
-                    }
+            array_walk(
+                $items,
+                function ($item) use (&$errors) {
+                    $field = function ($item) {
+                        if (key_exists('dataPath', $item)) {
+                            return str_replace('body.', '', $item['dataPath']);
+                        }
 
-                    var_dump($item);
-                };
+                        return '';
+                    };
 
-                $errors[$field($item)] = $item;
-            });
+                    $errors[$field($item)] = $item;
+                }
+            );
         }
 
         return $errors;
     }
 
     /**
-     * @param $status
-     * @param $response
+     * @param       $status
+     * @param       $response
      * @param array $headers
+     *
      * @return $this
      *
      * @throws RequestException
@@ -197,12 +212,15 @@ class ResourceClient implements ResourceClientInterface
             throw new RequestException($responseError);
         }
 
-        return ObjectFactory::create(ResourceResponse::class, [
-            'status'     => $status,
-            'errors'     => [],
-            'validation' => $validation,
-            'headers'    => $headers,
-            'content'    => $response
-        ]);
+        return ObjectFactory::create(
+            ResourceResponse::class,
+            [
+                'status' => $status,
+                'errors' => [],
+                'validation' => $validation,
+                'headers' => $headers,
+                'content' => $response,
+            ]
+        );
     }
 }

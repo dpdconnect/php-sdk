@@ -2,6 +2,11 @@
 
 namespace DpdConnect\Sdk\Objects;
 
+/**
+ * Class MetaData
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class MetaData extends BaseObject
 {
     const DEFAULTVERSIONSTRING = 'UNKNOWN';
@@ -31,11 +36,13 @@ class MetaData extends BaseObject
 
     /**
      * @param string $webshopType
+     *
      * @return Metadata
      */
     public function setWebshopType($webshopType)
     {
         $this->webshopType = $webshopType;
+
         return $this;
     }
 
@@ -49,11 +56,13 @@ class MetaData extends BaseObject
 
     /**
      * @param string $webshopVersion
+     *
      * @return Metadata
      */
     public function setWebshopVersion($webshopVersion)
     {
         $this->webshopVersion = $webshopVersion;
+
         return $this;
     }
 
@@ -67,11 +76,13 @@ class MetaData extends BaseObject
 
     /**
      * @param string $pluginVersion
+     *
      * @return Metadata
      */
     public function setPluginVersion($pluginVersion)
     {
         $this->pluginVersion = $pluginVersion;
+
         return $this;
     }
 }

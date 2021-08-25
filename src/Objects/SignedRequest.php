@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Objects;
 
 use DpdConnect\Sdk\Exceptions\ValidationException;
 
+/**
+ * Class SignedRequest
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class SignedRequest extends BaseObject
 {
     /**
@@ -56,10 +61,11 @@ class SignedRequest extends BaseObject
     /**
      * Create a SignedRequest from the provided data.
      *
-     * @param string|array $query The query string from the request
-     * @param string $signature The BaseObject64-encoded signature for the request
-     * @param int $requestTimestamp The UNIX timestamp for the time the request was made
-     * @param string $body The request body
+     * @param string|array $query            The query string from the request
+     * @param string       $signature        The BaseObject64-encoded signature for the request
+     * @param int          $requestTimestamp The UNIX timestamp for the time the request was made
+     * @param string       $body             The request body
+     *
      * @return SignedRequest
      * @throws ValidationException when a required parameter is missing.
      */

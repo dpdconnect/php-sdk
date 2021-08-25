@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Common;
 
 use DpdConnect\Sdk\Exceptions\AuthenticateException;
 
+/**
+ * Class AuthenticatedHttpClient
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 class AuthenticatedHttpClient
 {
     /**
@@ -74,7 +79,10 @@ class AuthenticatedHttpClient
 
                 // Since the Authorization Bearer always is the last added item, we overwrite it like this
                 unset($headers[0]);
-                $headers[count($headers) - 1] = sprintf('Authorization: Bearer %s', $this->authentication->getJwtToken());
+                $headers[count($headers) - 1] = sprintf(
+                    'Authorization: Bearer %s',
+                    $this->authentication->getJwtToken()
+                );
                 $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
             } catch (AuthenticateException $exception) {
                 throw $exception;

@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Objects\Response\CreateShipment;
 
 use DpdConnect\Sdk\Objects\Response\Generic\ItemStatusInterface;
 
+/**
+ * Class Label
+ *
+ * @package DpdConnect\Sdk\Objects\Response\CreateShipment
+ */
 class Label implements LabelInterface
 {
     /**
@@ -53,7 +58,7 @@ class Label implements LabelInterface
      * @param string              $codLabel
      */
     public function __construct(
-        ItemStatusInterface $status,
+        $status,
         $sequenceNumber,
         $trackingNumber,
         $label,
@@ -131,11 +136,13 @@ class Label implements LabelInterface
      */
     public function getAllLabels()
     {
-        return array_filter([
-            $this->label,
-            $this->exportLabel,
-            $this->returnLabel,
-            $this->codLabel,
-        ]);
+        return array_filter(
+            [
+                $this->label,
+                $this->exportLabel,
+                $this->returnLabel,
+                $this->codLabel,
+            ]
+        );
     }
 }

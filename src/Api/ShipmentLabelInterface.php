@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Api;
 
 use DpdConnect\Sdk\Objects\Response\Generic\ItemStatusInterface;
 
+/**
+ * Interface ShipmentLabelInterface
+ *
+ * @package DpdConnect\Sdk\Api
+ */
 interface ShipmentLabelInterface
 {
     /**

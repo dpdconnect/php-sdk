@@ -2,10 +2,7 @@
 
 namespace DpdConnect\Sdk\Resources;
 
-use DpdConnect\Sdk\Common;
 use DpdConnect\Sdk\Common\ResourceClient;
-use DpdConnect\Sdk\Exceptions\DpdException;
-use DpdConnect\Sdk\Objects;
 use InvalidArgumentException;
 
 /**
@@ -16,24 +13,23 @@ class Job extends BaseResource
     /**
      * @param ResourceClient $resourceClient
      */
-    public function __construct(
-        ResourceClient $resourceClient
-    ) {
+    public function __construct($resourceClient)
+    {
         parent::__construct($resourceClient);
     }
 
     /**
-     * @param array $query
+     * @param $id
+     *
      * @return array
-     * @throws DpdException
      */
     public function getState($id)
     {
         if (is_null($id)) {
-            throw new \InvalidArgumentException('No job id provided.');
+            throw new InvalidArgumentException('No job id provided.');
         }
 
-        $this->resourceClient->setResourceName('api/connect/v1/job/' . $id);
+        $this->resourceClient->setResourceName('api/connect/v1/job/'.$id);
 
         return $this->resourceClient->getResource();
     }

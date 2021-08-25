@@ -4,9 +4,16 @@ namespace DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 
 use DateTimeInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
-use DpdConnect\Sdk\Objects\Customs\CustomsLine;
+use DpdConnect\Sdk\Objects\ShipmentOrder\Customs\Consignee;
+use DpdConnect\Sdk\Objects\ShipmentOrder\Customs\Consignor;
+use DpdConnect\Sdk\Objects\ShipmentOrder\Customs\CustomsLine;
 use JsonSerializable;
 
+/**
+ * Class Customs
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder\Shipment
+ */
 class Customs extends BaseObject implements JsonSerializable
 {
     /**
@@ -50,7 +57,7 @@ class Customs extends BaseObject implements JsonSerializable
     protected $movementReferences;
 
     /**
-     * @var CustomsLine[[
+     * @var CustomsLine[]
      */
     protected $customsLines;
 

@@ -2,13 +2,27 @@
 
 namespace DpdConnect\Sdk\Exceptions;
 
-use Exception;
 use DpdConnect\Sdk\Common\ResponseError;
+use Exception;
 
-abstract class DpdException extends Exception
+/**
+ * Class DpdException
+ *
+ * @package DpdConnect\Sdk\Exceptions
+ */
+class DpdException extends Exception
 {
+    /**
+     * @var
+     */
     private $errorDetails;
 
+    /**
+     * DpdException constructor.
+     *
+     * @param     $error
+     * @param int $code
+     */
     public function __construct($error, $code = 0)
     {
         $this->errorDetails = $error;
@@ -19,11 +33,12 @@ abstract class DpdException extends Exception
             parent::__construct($error->getMessage(), $code, $error);
         } elseif (is_string($error)) {
             parent::__construct($error, $code);
-        } else {
-            
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getErrorDetails()
     {
         return $this->errorDetails;

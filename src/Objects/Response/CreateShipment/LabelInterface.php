@@ -2,10 +2,17 @@
 
 namespace DpdConnect\Sdk\Objects\Response\CreateShipment;
 
+use DpdConnect\Sdk\Objects\Response\Generic\ItemStatusInterface;
+
+/**
+ * Interface LabelInterface
+ *
+ * @package DpdConnect\Sdk\Objects\Response\CreateShipment
+ */
 interface LabelInterface
 {
     /**
-     * @return \DpdConnect\Sdk\Objects\Response\Generic\ItemStatusInterface
+     * @return ItemStatusInterface
      */
     public function getStatus();
 

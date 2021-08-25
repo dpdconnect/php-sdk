@@ -5,17 +5,24 @@ namespace DpdConnect\Sdk;
 use DpdConnect\Sdk\Common\Authentication;
 use DpdConnect\Sdk\Common\HttpClient;
 use DpdConnect\Sdk\Common\ResourceClient;
-use DpdConnect\Sdk\Resources\Parcelshop;
-use DpdConnect\Sdk\Resources\Shipment;
 use DpdConnect\Sdk\Resources\Country;
-use DpdConnect\Sdk\Resources\Parcel;
 use DpdConnect\Sdk\Resources\Job;
+use DpdConnect\Sdk\Resources\Parcel;
+use DpdConnect\Sdk\Resources\Parcelshop;
+use DpdConnect\Sdk\Resources\Product;
+use DpdConnect\Sdk\Resources\Shipment;
+use DpdConnect\Sdk\Resources\Token;
 
+/**
+ * Class Client
+ *
+ * @package DpdConnect\Sdk
+ */
 class Client
 {
     const ENDPOINT = 'https://api.dpdconnect.nl';
 
-    const CLIENT_VERSION = '1.0.3';
+    const CLIENT_VERSION = '1.0.4';
 
     /**
      * @var string
@@ -43,6 +50,21 @@ class Client
     public $parcel;
 
     /**
+     * @var Job
+     */
+    public $job;
+
+    /**
+     * @var Token
+     */
+    public $token;
+
+    /**
+     * @var Product
+     */
+    public $product;
+
+    /**
      * @var HttpClient
      */
     protected $httpClient;
@@ -58,13 +80,15 @@ class Client
     private $resourceClient;
 
     /**
-     * @param Authentication $authentication
-     * @param HttpClient $httpClient
+     * @param Authentication      $authentication
+     * @param HttpClient|null     $httpClient
+     * @param ResourceClient|null $resourceClient
+     * @param string              $url
      */
     public function __construct(
-        Authentication $authentication,
-        HttpClient $httpClient = null,
-        ResourceClient $resourceClient = null,
+        $authentication,
+        $httpClient = null,
+        $resourceClient = null,
         $url = self::ENDPOINT
     ) {
         $this->authentication = $authentication;
@@ -76,7 +100,9 @@ class Client
         $this->parcelshop = new Parcelshop($this->resourceClient);
         $this->country = new Country($this->resourceClient);
         $this->parcel = new Parcel($this->resourceClient);
+        $this->product = new Product($this->resourceClient);
         $this->job = new Job($this->resourceClient);
+        $this->token = new Token($this->httpClient);
     }
 
     /**
@@ -120,10 +146,26 @@ class Client
     }
 
     /**
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
      * @return Job
      */
     public function getJob()
     {
         return $this->job;
+    }
+
+    /**
+     * @return Token
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

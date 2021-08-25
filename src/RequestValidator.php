@@ -2,9 +2,8 @@
 
 namespace DpdConnect\Sdk;
 
-use function base64_decode;
 use DpdConnect\Sdk\Objects\SignedRequest;
-
+use function base64_decode;
 use function hash;
 use function hash_equals;
 use function hash_hmac;
@@ -13,6 +12,11 @@ use function implode;
 use function ksort;
 use function time;
 
+/**
+ * Class RequestValidator
+ *
+ * @package DpdConnect\Sdk
+ */
 class RequestValidator
 {
     const BODY_HASH_ALGO = 'sha256';
@@ -39,6 +43,7 @@ class RequestValidator
      * Verify that the signed request was submitted from DpdConnect\Sdk using the known key.
      *
      * @param SignedRequest $request
+     *
      * @return bool
      */
     public function verify(SignedRequest $request)
@@ -51,6 +56,11 @@ class RequestValidator
         return hash_equals($expectedSignature, $calculatedSignature);
     }
 
+    /**
+     * @param SignedRequest $request
+     *
+     * @return string
+     */
     private function buildPayloadFromRequest(SignedRequest $request)
     {
         $parts = [];
@@ -73,7 +83,8 @@ class RequestValidator
      * Check whether the request was made recently.
      *
      * @param SignedRequest $request The signed request object.
-     * @param int $offset The maximum number of seconds that is allowed to consider the request recent
+     * @param int           $offset  The maximum number of seconds that is allowed to consider the request recent
+     *
      * @return bool
      */
     public function isRecent(SignedRequest $request, $offset = 10)
