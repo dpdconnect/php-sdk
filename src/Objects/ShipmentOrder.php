@@ -6,6 +6,11 @@ use DpdConnect\Sdk\Objects\ShipmentOrder\PrintOptions;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 use JsonSerializable;
 
+/**
+ * Class ShipmentOrder
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ShipmentOrder extends BaseObject implements JsonSerializable
 {
     /**
@@ -33,11 +38,13 @@ class ShipmentOrder extends BaseObject implements JsonSerializable
 
     /**
      * @param PrintOptions $printOptions
+     *
      * @return ShipmentOrder
      */
-    public function setPrintOptions(PrintOptions $printOptions)
+    public function setPrintOptions($printOptions)
     {
         $this->printOptions = $printOptions;
+
         return $this;
     }
 
@@ -51,11 +58,13 @@ class ShipmentOrder extends BaseObject implements JsonSerializable
 
     /**
      * @param bool $createLabel
+     *
      * @return ShipmentOrder
      */
     public function setCreateLabel($createLabel)
     {
         $this->createLabel = $createLabel;
+
         return $this;
     }
 
@@ -69,11 +78,13 @@ class ShipmentOrder extends BaseObject implements JsonSerializable
 
     /**
      * @param Shipment[] $shipments
+     *
      * @return ShipmentOrder
      */
-    public function setShipments(array $shipments = [])
+    public function setShipments($shipments = [])
     {
         $this->shipments = $shipments;
+
         return $this;
     }
 }

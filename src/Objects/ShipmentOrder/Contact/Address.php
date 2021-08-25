@@ -138,11 +138,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $companyName
+     *
      * @return Address
      */
     public function setCompanyName($companyName)
     {
         $this->companyname = $companyName;
+
         return $this;
     }
 
@@ -156,11 +158,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $contactPerson
+     *
      * @return Address
      */
     public function setContactPerson($contactPerson)
     {
         $this->contactPerson = $contactPerson;
+
         return $this;
     }
 
@@ -174,11 +178,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $name1
+     *
      * @return Address
      */
     public function setName1($name1)
     {
         $this->name1 = $name1;
+
         return $this;
     }
 
@@ -192,11 +198,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $name2
+     *
      * @return Address
      */
     public function setName2($name2)
     {
         $this->name2 = $name2;
+
         return $this;
     }
 
@@ -210,11 +218,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $street
+     *
      * @return Address
      */
     public function setStreet($street)
     {
         $this->street = $street;
+
         return $this;
     }
 
@@ -228,11 +238,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $houseNumber
+     *
      * @return Address
      */
     public function setHouseNumber($houseNumber)
     {
         $this->housenumber = $houseNumber;
+
         return $this;
     }
 
@@ -241,16 +253,18 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
      */
     public function getPostalCode()
     {
-        return $this->postalode;
+        return $this->postalcode;
     }
 
     /**
      * @param string $postalCode
+     *
      * @return Address
      */
     public function setPostalCode($postalCode)
     {
         $this->postalcode = $postalCode;
+
         return $this;
     }
 
@@ -264,11 +278,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $city
+     *
      * @return Address
      */
     public function setCity($city)
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -282,11 +298,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $state
+     *
      * @return Address
      */
     public function setState($state)
     {
         $this->state = $state;
+
         return $this;
     }
 
@@ -300,11 +318,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $country
+     *
      * @return Address
      */
     public function setCountry($country)
     {
         $this->country = $country;
+
         return $this;
     }
 
@@ -318,11 +338,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param bool $commercialAddress
+     *
      * @return Address
      */
     public function setCommercialAddress($commercialAddress)
     {
         $this->commercialAddress = $commercialAddress;
+
         return $this;
     }
 
@@ -336,11 +358,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $building
+     *
      * @return Address
      */
     public function setBuilding($building)
     {
         $this->building = $building;
+
         return $this;
     }
 
@@ -354,11 +378,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $floor
+     *
      * @return Address
      */
     public function setFloor($floor)
     {
         $this->floor = $floor;
+
         return $this;
     }
 
@@ -372,11 +398,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $department
+     *
      * @return Address
      */
     public function setDepartment($department)
     {
         $this->department = $department;
+
         return $this;
     }
 
@@ -390,11 +418,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $doorCode
+     *
      * @return Address
      */
     public function setDoorCode($doorCode)
     {
         $this->doorcode = $doorCode;
+
         return $this;
     }
 
@@ -408,11 +438,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param int $globalLocationNumber
+     *
      * @return Address
      */
     public function setGlobalLocationNumber($globalLocationNumber)
     {
         $this->globalLocationNumber = $globalLocationNumber;
+
         return $this;
     }
 
@@ -426,11 +458,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $phoneNumber
+     *
      * @return Address
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 
@@ -444,11 +478,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $faxNumber
+     *
      * @return Address
      */
     public function setFaxNumber($faxNumber)
     {
         $this->faxNumber = $faxNumber;
+
         return $this;
     }
 
@@ -462,11 +498,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $email
+     *
      * @return Address
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -480,11 +518,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $website
+     *
      * @return Address
      */
     public function setWebsite($website)
     {
         $this->website = $website;
+
         return $this;
     }
 
@@ -498,11 +538,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $eoriNumber
+     *
      * @return Address
      */
     public function setEoriNumber($eoriNumber)
     {
         $this->eoriNumber = $eoriNumber;
+
         return $this;
     }
 
@@ -516,11 +558,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $vatNumber
+     *
      * @return Address
      */
     public function setVatNumber($vatNumber)
     {
         $this->vatNumber = $vatNumber;
+
         return $this;
     }
 
@@ -534,11 +578,13 @@ class Address extends BaseObject implements JsonSerializable, AddressInterface
 
     /**
      * @param string $comment
+     *
      * @return Address
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 }

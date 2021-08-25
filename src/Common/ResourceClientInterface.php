@@ -2,15 +2,18 @@
 
 namespace DpdConnect\Sdk\Common;
 
-use DpdConnect\Sdk\Exception\HttpException;
-use DpdConnect\Sdk\Exception\InvalidArgumentException;
-
+/**
+ * Interface ResourceClientInterface
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 interface ResourceClientInterface
 {
     /**
      * Gets a resource.
      *
      * @param array $query
+     *
      * @return array
      */
     public function getResource($query = []);
@@ -19,6 +22,7 @@ interface ResourceClientInterface
      * Gets a list of resources.
      *
      * @param array $query
+     *
      * @return array
      */
     public function getResources($query = []);

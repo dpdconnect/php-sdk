@@ -3,11 +3,16 @@
 namespace DpdConnect\Sdk;
 
 use DpdConnect\Sdk\Common\AuthenticatedHttpClient;
-use DpdConnect\Sdk\Common\HttpClient;
 use DpdConnect\Sdk\Common\Authentication;
+use DpdConnect\Sdk\Common\HttpClient;
 use DpdConnect\Sdk\Common\ResourceClient;
 use DpdConnect\Sdk\Resources\Authentication as AuthenticationResource;
 
+/**
+ * Class ClientBuilder
+ *
+ * @package DpdConnect\Sdk
+ */
 class ClientBuilder implements ClientBuilderInterface
 {
     /**
@@ -27,12 +32,11 @@ class ClientBuilder implements ClientBuilderInterface
 
     /**
      * @param string $endpoint
-     * @param null $meta
+     * @param null   $meta
      */
     public function __construct($endpoint = null, $meta = null)
     {
-        $this->endpoint = !empty($endpoint) ? $endpoint : Client::ENDPOINT;
-        $this->meta = $meta;
+        $this->endpoint = 1 === preg_match('#((https?)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i', $endpoint) ? $endpoint : Client::ENDPOINT;
     }
 
     /**
@@ -58,12 +62,14 @@ class ClientBuilder implements ClientBuilderInterface
 
     /**
      * @param HttpClient $httpClient
+     *
      * @return ClientBuilder
      */
     public function setHttpClient(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
         $this->httpClient->setMeta($this->meta);
+
         return $this;
     }
 
@@ -85,7 +91,7 @@ class ClientBuilder implements ClientBuilderInterface
     /**
      * Build the dpd connect client authenticated by jwt token
      *
-     * @param string $jwtToken     JWT tokken for authentication
+     * @param string $jwtToken JWT tokken for authentication
      *
      * @return Client
      */
@@ -105,9 +111,7 @@ class ClientBuilder implements ClientBuilderInterface
     {
         list($resourceClient) = $this->setUp($authentication);
 
-        $client = new Client($authentication, null, $resourceClient, $this->endpoint);
-
-        return $client;
+        return new Client($authentication, $this->getHttpClient(), $resourceClient, $this->endpoint);
     }
 
     /**
@@ -123,7 +127,6 @@ class ClientBuilder implements ClientBuilderInterface
             $authenticationResource,
             $authentication
         );
-
 
         $resourceClient = new ResourceClient(
             $authenticatedHttpClient

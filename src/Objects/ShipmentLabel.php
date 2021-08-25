@@ -5,6 +5,11 @@ namespace DpdConnect\Sdk\Objects;
 use DpdConnect\Sdk\Api\Data\Response\ItemStatusInterface;
 use DpdConnect\Sdk\Api\ShipmentLabelInterface;
 
+/**
+ * Class ShipmentLabel
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ShipmentLabel extends BaseObject implements ShipmentLabelInterface
 {
     /**
@@ -103,11 +108,13 @@ class ShipmentLabel extends BaseObject implements ShipmentLabelInterface
      */
     public function getAllLabels()
     {
-        return array_filter([
-            $this->label,
-            $this->exportLabel,
-            $this->returnLabel,
-            $this->codLabel,
-        ]);
+        return array_filter(
+            [
+                $this->label,
+                $this->exportLabel,
+                $this->returnLabel,
+                $this->codLabel,
+            ]
+        );
     }
 }

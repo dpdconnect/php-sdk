@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment;
 
 use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment\Product;
 
+/**
+ * Interface ProductInterface
+ *
+ * @package DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment
+ */
 interface ProductInterface
 {
     /**
@@ -13,6 +18,7 @@ interface ProductInterface
 
     /**
      * @param string $productCode
+     *
      * @return Product
      */
     public function setProductCode($productCode);
@@ -24,6 +30,7 @@ interface ProductInterface
 
     /**
      * @param bool|null $homeDelivery
+     *
      * @return Product
      */
     public function setHomeDelivery($homeDelivery);
@@ -35,6 +42,7 @@ interface ProductInterface
 
     /**
      * @param bool|null $saturdayDelivery
+     *
      * @return Product
      */
     public function setSaturdayDelivery($saturdayDelivery);
@@ -46,6 +54,7 @@ interface ProductInterface
 
     /**
      * @param bool|null $tyres
+     *
      * @return Product
      */
     public function setTyres($tyres);
@@ -57,6 +66,7 @@ interface ProductInterface
 
     /**
      * @param string|null $parcelShopId
+     *
      * @return Product
      */
     public function setParcelShopId($parcelShopId);
@@ -68,6 +78,7 @@ interface ProductInterface
 
     /**
      * @param mixed $pickup
+     *
      * @return Product
      */
     public function setPickup($pickup);

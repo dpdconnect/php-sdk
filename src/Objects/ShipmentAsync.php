@@ -2,10 +2,13 @@
 
 namespace DpdConnect\Sdk\Objects;
 
-use DpdConnect\Sdk\Objects\ShipmentOrder\PrintOptions;
-use DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 use JsonSerializable;
 
+/**
+ * Class ShipmentAsync
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ShipmentAsync extends BaseObject implements JsonSerializable
 {
     /**
@@ -28,11 +31,13 @@ class ShipmentAsync extends BaseObject implements JsonSerializable
 
     /**
      * @param mixed $callbackURI
+     *
      * @return ShipmentAsync
      */
     public function setCallbackURI($callbackURI)
     {
         $this->callbackURI = $callbackURI;
+
         return $this;
     }
 
@@ -46,11 +51,13 @@ class ShipmentAsync extends BaseObject implements JsonSerializable
 
     /**
      * @param ShipmentOrder $label
-     * @return ShipmentOrder
+     *
+     * @return ShipmentAsync
      */
     public function setLabel(ShipmentOrder $label)
     {
         $this->label = $label;
+
         return $this;
     }
 }

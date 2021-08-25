@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Objects;
 
 use DpdConnect\Sdk\Api\Data\Response\ResponseStatusInterface;
 
+/**
+ * Class ResponseStatus
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ResponseStatus implements ResponseStatusInterface
 {
     /**
@@ -72,6 +77,6 @@ class ResponseStatus implements ResponseStatusInterface
      */
     public function isError()
     {
-        return ! $this->isSuccess();
+        return !$this->isSuccess();
     }
 }

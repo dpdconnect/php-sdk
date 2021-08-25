@@ -2,6 +2,11 @@
 
 namespace DpdConnect\Sdk\Common;
 
+/**
+ * Class Authentication
+ *
+ * @package DpdConnect\Sdk\Common
+ */
 class Authentication
 {
     /**
@@ -27,7 +32,8 @@ class Authentication
     /**
      * @param $username
      * @param $password
-     * @return \DpdConnect\Sdk\Security\Authentication
+     *
+     * @return Authentication
      */
     public static function fromPassword($username, $password)
     {
@@ -40,6 +46,7 @@ class Authentication
 
     /**
      * @param $jwtToken
+     *
      * @return Authentication
      */
     public static function fromJwtToken($jwtToken)
@@ -76,6 +83,7 @@ class Authentication
 
     /**
      * @param $jwtToken
+     *
      * @return $this
      */
     public function setJwtToken($jwtToken)
@@ -87,6 +95,7 @@ class Authentication
 
     /**
      * @param callable $callable
+     *
      * @return $this
      */
     public function setTokenUpdateCallback(callable $callable)

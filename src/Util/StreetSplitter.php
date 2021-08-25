@@ -2,6 +2,11 @@
 
 namespace DpdConnect\Sdk\Util;
 
+/**
+ * Class StreetSplitter
+ *
+ * @package DpdConnect\Sdk\Util
+ */
 class StreetSplitter implements StreetSplitterInterface
 {
     /**
@@ -14,36 +19,36 @@ class StreetSplitter implements StreetSplitterInterface
     public static function splitStreet($street)
     {
         $result = [
-            'street_name'   => $street,
+            'street_name' => $street,
             'street_number' => '',
-            'supplement'    => '',
+            'supplement' => '',
         ];
 
         if (preg_match(self::getRegex(), $street, $matches)) {
             // Pattern A
-            if (isset($matches[self::OPTION_A_STREET_NAME]) && ! empty($matches[self::OPTION_A_STREET_NAME])) {
+            if (isset($matches[self::OPTION_A_STREET_NAME]) && !empty($matches[self::OPTION_A_STREET_NAME])) {
                 $result['street_name'] = trim($matches[self::OPTION_A_STREET_NAME]);
 
-                if (isset($matches[self::OPTION_A_HOUSE_NUMBER]) && ! empty($matches[self::OPTION_A_HOUSE_NUMBER])) {
+                if (isset($matches[self::OPTION_A_HOUSE_NUMBER]) && !empty($matches[self::OPTION_A_HOUSE_NUMBER])) {
                     $result['street_number'] = trim($matches[self::OPTION_A_HOUSE_NUMBER]);
                 }
 
                 if (isset($matches[self::OPTION_A_ADDITION_1]) && isset($matches[self::OPTION_A_ADDITION_2])) {
                     $result['supplement']
-                        = trim($matches[self::OPTION_A_ADDITION_1] . ' ' . $matches[self::OPTION_A_ADDITION_2]);
+                        = trim($matches[self::OPTION_A_ADDITION_1].' '.$matches[self::OPTION_A_ADDITION_2]);
                 }
 
                 // Pattern B
-            } elseif (isset($matches[self::OPTION_B_STREET_NAME]) && ! empty($matches[self::OPTION_B_STREET_NAME])) {
+            } elseif (isset($matches[self::OPTION_B_STREET_NAME]) && !empty($matches[self::OPTION_B_STREET_NAME])) {
                 $result['street_name'] = trim($matches[self::OPTION_B_STREET_NAME]);
 
-                if (isset($matches[self::OPTION_B_HOUSE_NUMBER]) && ! empty($matches[self::OPTION_B_HOUSE_NUMBER])) {
+                if (isset($matches[self::OPTION_B_HOUSE_NUMBER]) && !empty($matches[self::OPTION_B_HOUSE_NUMBER])) {
                     $result['street_number'] = trim($matches[self::OPTION_B_HOUSE_NUMBER]);
                 }
 
                 if (isset($matches[self::OPTION_B_ADDITION_1]) && isset($matches[self::OPTION_B_ADDITION_2])) {
                     $result['supplement']
-                        = trim($matches[self::OPTION_B_ADDITION_1] . ' ' . $matches[self::OPTION_B_ADDITION_2]);
+                        = trim($matches[self::OPTION_B_ADDITION_1].' '.$matches[self::OPTION_B_ADDITION_2]);
                 }
             }
         }

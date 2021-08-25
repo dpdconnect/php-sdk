@@ -2,6 +2,11 @@
 
 namespace DpdConnect\Sdk\Objects\Response\Generic;
 
+/**
+ * Class ItemStatus
+ *
+ * @package DpdConnect\Sdk\Objects\Response\Generic
+ */
 class ItemStatus extends ResponseStatus implements ItemStatusInterface
 {
     /**

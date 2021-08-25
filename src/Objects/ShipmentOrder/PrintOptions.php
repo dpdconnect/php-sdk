@@ -6,6 +6,11 @@ use DpdConnect\Sdk\Api\Data\ShipmentOrder\PrintOptionsInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 
+/**
+ * Class PrintOptions
+ *
+ * @package DpdConnect\Sdk\Objects\ShipmentOrder
+ */
 class PrintOptions extends BaseObject implements JsonSerializable, PrintOptionsInterface
 {
     /**
@@ -38,11 +43,13 @@ class PrintOptions extends BaseObject implements JsonSerializable, PrintOptionsI
 
     /**
      * @param string $printerLanguage
+     *
      * @return PrintOptions
      */
     public function setPrinterLanguage($printerLanguage)
     {
         $this->printerLanguage = $printerLanguage;
+
         return $this;
     }
 
@@ -56,11 +63,13 @@ class PrintOptions extends BaseObject implements JsonSerializable, PrintOptionsI
 
     /**
      * @param string $paperFormat
+     *
      * @return PrintOptions
      */
     public function setPaperFormat($paperFormat)
     {
         $this->paperFormat = $paperFormat;
+
         return $this;
     }
 
@@ -74,11 +83,13 @@ class PrintOptions extends BaseObject implements JsonSerializable, PrintOptionsI
 
     /**
      * @param int $verticalOffset
+     *
      * @return PrintOptions
      */
     public function setVerticalOffset($verticalOffset)
     {
         $this->verticalOffset = $verticalOffset;
+
         return $this;
     }
 
@@ -92,11 +103,13 @@ class PrintOptions extends BaseObject implements JsonSerializable, PrintOptionsI
 
     /**
      * @param int $horizontalOffset
+     *
      * @return PrintOptions
      */
     public function setHorizontalOffset($horizontalOffset)
     {
         $this->horizontalOffset = $horizontalOffset;
+
         return $this;
     }
 }

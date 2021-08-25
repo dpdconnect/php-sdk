@@ -4,6 +4,11 @@ namespace DpdConnect\Sdk\Objects;
 
 use JsonSerializable;
 
+/**
+ * Class ResourceResponse
+ *
+ * @package DpdConnect\Sdk\Objects
+ */
 class ResourceResponse extends BaseObject implements JsonSerializable
 {
     /**
@@ -36,11 +41,13 @@ class ResourceResponse extends BaseObject implements JsonSerializable
 
     /**
      * @param string $status
+     *
      * @return ResourceResponse
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -52,6 +59,9 @@ class ResourceResponse extends BaseObject implements JsonSerializable
         return $this->errors;
     }
 
+    /**
+     * @return bool
+     */
     public function hasErrors()
     {
         return (count($this->errors) >= 0);
@@ -59,11 +69,13 @@ class ResourceResponse extends BaseObject implements JsonSerializable
 
     /**
      * @param string[] $errors
+     *
      * @return ResourceResponse
      */
     public function setErrors(array $errors = [])
     {
         $this->errors = $errors;
+
         return $this;
     }
 
@@ -77,11 +89,13 @@ class ResourceResponse extends BaseObject implements JsonSerializable
 
     /**
      * @param string[] $validation
+     *
      * @return ResourceResponse
      */
     public function setValidation(array $validation = [])
     {
         $this->validation = $validation;
+
         return $this;
     }
 
@@ -95,11 +109,13 @@ class ResourceResponse extends BaseObject implements JsonSerializable
 
     /**
      * @param string $content
+     *
      * @return ResourceResponse
      */
     public function setContent(string $content)
     {
         $this->content = $content;
+
         return $this;
     }
 }

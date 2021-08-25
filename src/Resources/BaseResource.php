@@ -28,7 +28,7 @@ class BaseResource
     /**
      * @param ResourceClient $resourceClient
      */
-    public function __construct(ResourceClient $resourceClient)
+    public function __construct($resourceClient)
     {
         $this->resourceClient = $resourceClient;
     }
@@ -51,6 +51,7 @@ class BaseResource
 
     /**
      * @param string $body
+     *
      * @return $this
      *
      * @throws Exceptions\AuthenticateException

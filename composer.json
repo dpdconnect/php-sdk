@@ -1,7 +1,7 @@
 {
   "name": "dpdconnect/php-sdk",
-  "description": "DPD Connect PHP SDK",
   "type": "library",
+  "description": "DPD Connect PHP SDK",
   "license": "OSL-3.0",
   "authors": [
     {

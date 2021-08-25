@@ -11,6 +11,11 @@ use JsonSerializable;
  */
 class BaseObject implements JsonSerializable
 {
+    /**
+     * BaseObject constructor.
+     *
+     * @param array $data
+     */
     public function __construct(array $data = [])
     {
         if (count($data) > 0) {
@@ -34,6 +39,7 @@ class BaseObject implements JsonSerializable
                 }
             }
         }
+
         return $this;
     }
 
@@ -44,8 +50,8 @@ class BaseObject implements JsonSerializable
     {
         $properties = get_object_vars($this);
         $properties = array_filter($properties, static function ($value) {
-            return $value === false || !empty($value);
-        });
+             return $value === false || !empty($value);
+         });
 
         return $properties;
     }

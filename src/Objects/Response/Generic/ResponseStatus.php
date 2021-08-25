@@ -2,10 +2,15 @@
 
 namespace DpdConnect\Sdk\Objects\Response\Generic;
 
+/**
+ * Class ResponseStatus
+ *
+ * @package DpdConnect\Sdk\Objects\Response\Generic
+ */
 class ResponseStatus implements ResponseStatusInterface
 {
     /**
-     * @var int
+     * @var int|string
      */
     private $code;
 
@@ -70,6 +75,6 @@ class ResponseStatus implements ResponseStatusInterface
      */
     public function isError()
     {
-        return ! $this->isSuccess();
+        return !$this->isSuccess();
     }
 }
