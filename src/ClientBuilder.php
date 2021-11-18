@@ -37,6 +37,7 @@ class ClientBuilder implements ClientBuilderInterface
     public function __construct($endpoint = null, $meta = null)
     {
         $this->endpoint = 1 === preg_match('#((https?)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i', $endpoint) ? $endpoint : Client::ENDPOINT;
+        $this->meta = $meta;
     }
 
     /**
