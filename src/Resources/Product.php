@@ -40,7 +40,11 @@ class Product extends BaseResource
             $this->storeCachedList($products, $query);
             return $products;
         } catch (DpdException $e) {
-            throw $e;
+            $result = $this->getCachedList($query,31556926); //a year
+            if ($result) {
+                return $result;
+            }
+            return [];
         }
     }
 
@@ -49,11 +53,11 @@ class Product extends BaseResource
      *
      * @return false|mixed
      */
-    private function getCachedList($query)
+    private function getCachedList($query, $maxAge = 3600)
     {
-        $filename = sys_get_temp_dir() . '/dpd/' . sha1('dpd-products' . date('YmdH') . serialize($query));
+        $filename = sys_get_temp_dir() . '/dpd/dpd-products' ;
 
-        if (!file_exists($filename) || filesize($filename) == 0) {
+        if (!file_exists($filename) || filesize($filename) == 0 || filemtime($filename) < time()-$maxAge) {
             return false;
         }
 
@@ -70,7 +74,7 @@ class Product extends BaseResource
             mkdir(sys_get_temp_dir() . '/dpd/');
         }
 
-        $filename = sys_get_temp_dir() .'/dpd/' . sha1('dpd-products' . date('YmdH') . serialize($query));
+        $filename = sys_get_temp_dir() .'/dpd/dpd-products';
         file_put_contents($filename, serialize($products));
     }
 }

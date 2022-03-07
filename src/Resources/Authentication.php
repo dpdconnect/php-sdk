@@ -54,16 +54,19 @@ class Authentication implements AuthenticationResourceInterface
         $headers = [
             'Content-Type' => 'application/json',
         ];
+        try {
+            $response = $this->httpClient->sendRequest(
+                HttpClient::REQUEST_POST,
+                self::RESOURCE_URI_AUTH,
+                false,
+                $headers,
+                json_encode($requestBody)
+            );
+            return $this->processRequest($response);
+        }catch (\Exception $exception){
+            return [];
+        }
 
-        $response = $this->httpClient->sendRequest(
-            HttpClient::REQUEST_POST,
-            self::RESOURCE_URI_AUTH,
-            false,
-            $headers,
-            json_encode($requestBody)
-        );
-
-        return $this->processRequest($response);
     }
 
     /**
