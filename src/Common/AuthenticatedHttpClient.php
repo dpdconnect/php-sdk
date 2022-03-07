@@ -52,10 +52,12 @@ class AuthenticatedHttpClient
                 $this->authentication->getPassword()
             );
 
-            $this->authentication
-                ->setJwtToken($tokens['token']);
-            if (is_callable($this->authentication->tokenUpdateCallback)) {
-                call_user_func($this->authentication->tokenUpdateCallback, $this->authentication->getJwtToken());
+            if (isset($tokens['token'])) {
+                $this->authentication
+                    ->setJwtToken($tokens['token']);
+                if (is_callable($this->authentication->tokenUpdateCallback)) {
+                    call_user_func($this->authentication->tokenUpdateCallback, $this->authentication->getJwtToken());
+                }
             }
         }
 
@@ -85,7 +87,7 @@ class AuthenticatedHttpClient
                 );
                 $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
             } catch (AuthenticateException $exception) {
-                throw $exception;
+                $response = [];
             }
 
         }

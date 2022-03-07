@@ -104,7 +104,7 @@ class Token
      */
     private function getCachedPublicJWTToken($username)
     {
-        $filename = sys_get_temp_dir() . '/dpd/' . sha1('dpd-products' . date('YmdH') . serialize($username));
+        $filename = sys_get_temp_dir() . '/dpd/' . sha1('dpd-token' . date('YmdH') . serialize($username));
 
         if (!file_exists($filename) || filesize($filename) == 0) {
             return false;
@@ -123,7 +123,7 @@ class Token
             mkdir(sys_get_temp_dir() . '/dpd/');
         }
 
-        $filename = sys_get_temp_dir() .'/dpd/' . sha1('dpd-products' . date('YmdH') . serialize($username));
+        $filename = sys_get_temp_dir() .'/dpd/' . sha1('dpd-token' . date('YmdH') . serialize($username));
         file_put_contents($filename, serialize($token));
     }
 }
