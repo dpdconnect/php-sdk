@@ -117,6 +117,7 @@ class ResponseError implements \JsonSerializable
     /**
      * @return string[]
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $properties = get_object_vars($this);
