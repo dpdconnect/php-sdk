@@ -46,6 +46,7 @@ class BaseObject implements JsonSerializable
     /**
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $properties = get_object_vars($this);
