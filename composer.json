@@ -1,5 +1,5 @@
 {
-  "name": "dpdconnect/php-sdk",
+  "name": "lostcause/dpd-php-sdk",
   "type": "library",
   "description": "DPD Connect PHP SDK",
   "license": "OSL-3.0",
