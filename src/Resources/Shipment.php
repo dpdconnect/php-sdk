@@ -19,14 +19,6 @@ use InvalidArgumentException;
 class Shipment extends BaseResource
 {
     /**
-     * @param ResourceClient $resourceClient
-     */
-    public function __construct($resourceClient)
-    {
-        parent::__construct($resourceClient);
-    }
-
-    /**
      * @param bool $async
      *
      * @return string

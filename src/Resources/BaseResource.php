@@ -2,6 +2,7 @@
 
 namespace DpdConnect\Sdk\Resources;
 
+use DpdConnect\Sdk\CacheWrapper;
 use DpdConnect\Sdk\Common\ResourceClient;
 use DpdConnect\Sdk\Common\ResponseError;
 use DpdConnect\Sdk\Exceptions;
@@ -13,7 +14,7 @@ use DpdConnect\Sdk\Exceptions\ServerException;
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @SuppressWarnings(PHPMD.TooManyFields)
  */
-class BaseResource
+class BaseResource implements CacheableInterface
 {
     /**
      * @var ResourceClient
@@ -26,9 +27,16 @@ class BaseResource
     protected $object;
 
     /**
-     * @param ResourceClient $resourceClient
+     * @var CacheWrapper
      */
-    public function __construct($resourceClient)
+    protected $cacheWrapper = null;
+
+    /**
+     * @param $resourceClient
+     */
+    public function __construct(
+        $resourceClient
+    )
     {
         $this->resourceClient = $resourceClient;
     }
@@ -72,5 +80,13 @@ class BaseResource
 
         $ResponseError = new ResponseError($body);
         throw new RequestException($ResponseError->getErrorString());
+    }
+
+    /**
+     * @param CacheWrapper|null $cacheWrapper
+     */
+    public function setCacheWrapper($cacheWrapper)
+    {
+        $this->cacheWrapper = $cacheWrapper;
     }
 }
