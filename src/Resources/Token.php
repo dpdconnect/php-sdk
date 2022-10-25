@@ -2,6 +2,7 @@
 
 namespace DpdConnect\Sdk\Resources;
 
+use DpdConnect\Sdk\CacheWrapper;
 use DpdConnect\Sdk\Common\HttpClient;
 
 /**
@@ -9,12 +10,17 @@ use DpdConnect\Sdk\Common\HttpClient;
  *
  * @package DpdConnect\Sdk\Resources
  */
-class Token
+class Token implements CacheableInterface
 {
     /**
      * @var HttpClient
      */
     private $httpClient;
+
+    /**
+     * @var CacheWrapper|null
+     */
+    private $cacheWrapper = null;
 
     /**
      * Token constructor.
@@ -35,7 +41,7 @@ class Token
      */
     public function getPublicJWTToken($username, $password)
     {
-        $result = $this->getCachedPublicJWTToken($username);
+        $result = $this->cacheWrapper->getCachedList($username, false, 'dpd_token');
         if ($result && $this->isTokenValid($result)) {
             return $result;
         }
@@ -65,7 +71,7 @@ class Token
             return $response;
         }
 
-        $this->storeCachedPublicJWTToken($decoded['token'], $username);
+        $this->cacheWrapper->storeCachedList($decoded['token'], $username, 'dpd_token');
 
         return $decoded['token'];
     }
@@ -98,32 +104,10 @@ class Token
     }
 
     /**
-     * @param $username
-     *
-     * @return false|mixed
+     * @param CacheWrapper|null $cacheWrapper
      */
-    private function getCachedPublicJWTToken($username)
+    public function setCacheWrapper($cacheWrapper)
     {
-        $filename = sys_get_temp_dir() . '/dpd/' . sha1('dpd-token' . date('YmdH') . serialize($username));
-
-        if (!file_exists($filename) || filesize($filename) == 0) {
-            return false;
-        }
-
-        return unserialize(file_get_contents($filename));
-    }
-
-    /**
-     * @param $token
-     * @param $username
-     */
-    private function storeCachedPublicJWTToken($token, $username)
-    {
-        if (!file_exists(sys_get_temp_dir() . '/dpd/')) {
-            mkdir(sys_get_temp_dir() . '/dpd/');
-        }
-
-        $filename = sys_get_temp_dir() .'/dpd/' . sha1('dpd-token' . date('YmdH') . serialize($username));
-        file_put_contents($filename, serialize($token));
+        $this->cacheWrapper = $cacheWrapper;
     }
 }
