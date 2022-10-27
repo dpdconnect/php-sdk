@@ -19,18 +19,12 @@ use DpdConnect\Sdk\Objects\Response\CreateShipment\LabelInterface;
  */
 class Shipment extends BaseResource
 {
-    /**
-     * @param ResourceClient $resourceClient
-     */
     public function __construct($resourceClient)
     {
         parent::__construct($resourceClient);
     }
 
-    /**
-     *
-     * @return string
-     */
+
     protected function getUrl()
     {
         return 'shipment';

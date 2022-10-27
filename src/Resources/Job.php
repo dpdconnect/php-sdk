@@ -11,14 +11,6 @@ use InvalidArgumentException;
 class Job extends BaseResource
 {
     /**
-     * @param ResourceClient $resourceClient
-     */
-    public function __construct($resourceClient)
-    {
-        parent::__construct($resourceClient);
-    }
-
-    /**
      * @param $id
      *
      * @return array

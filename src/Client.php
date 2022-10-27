@@ -5,6 +5,8 @@ namespace DpdConnect\Sdk;
 use DpdConnect\Sdk\Common\Authentication;
 use DpdConnect\Sdk\Common\HttpClient;
 use DpdConnect\Sdk\Common\ResourceClient;
+use DpdConnect\Sdk\Resources\CacheableInterface;
+use DpdConnect\Sdk\Resources\CacheInterface;
 use DpdConnect\Sdk\Resources\Country;
 use DpdConnect\Sdk\Resources\Job;
 use DpdConnect\Sdk\Resources\Parcel;
@@ -167,5 +169,17 @@ class Client
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * @param CacheInterface|null $cache
+     */
+    public function setCacheCallable($cache)
+    {
+        foreach ($this as $prop) {
+            if($prop instanceof CacheableInterface) {
+                $prop->setCacheWrapper(new CacheWrapper($cache));
+            }
+        }
     }
 }

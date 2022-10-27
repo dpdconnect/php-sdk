@@ -12,14 +12,6 @@ use InvalidArgumentException;
 class Parcel extends BaseResource
 {
     /**
-     * @param ResourceClient $resourceClient
-     */
-    public function __construct($resourceClient)
-    {
-        parent::__construct($resourceClient);
-    }
-
-    /**
      * @param array $query
      *
      * @return array

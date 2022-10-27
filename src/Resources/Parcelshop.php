@@ -10,14 +10,6 @@ use DpdConnect\Sdk\Common\ResourceClient;
 class Parcelshop extends BaseResource
 {
     /**
-     * @param ResourceClient $resourceClient
-     */
-    public function __construct($resourceClient)
-    {
-        parent::__construct($resourceClient);
-    }
-
-    /**
      * @param $id
      *
      * @return Parcelshop
