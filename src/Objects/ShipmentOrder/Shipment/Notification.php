@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment\NotificationInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\Shipment\NotificationInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 

@@ -25,13 +25,13 @@ class Country extends BaseResource
      */
     public function getList($query = [])
     {
-        $result = $this->getCachedList($query);
+/*        $result = $this->getCachedList($query);
 
         if ($result) {
             return $result;
-        }
+        }*/
 
-        $this->resourceClient->setResourceName('api/connect/v1/countries');
+        $this->resourceClient->setResourceName('location/country');
         $countries = $this->resourceClient->getResources($query);
         $this->storeCachedList($countries, $query);
 

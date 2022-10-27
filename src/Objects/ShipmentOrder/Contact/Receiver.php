@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder\Contact;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\Contact\ReceiverInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\Contact\ReceiverInterface;
 use JsonSerializable;
 
 /**

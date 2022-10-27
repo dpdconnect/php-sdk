@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder\Customs;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\ConsigneeInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\Customs\ConsigneeInterface;
 use DpdConnect\Sdk\Objects\ShipmentOrder\Contact\Address;
 use JsonSerializable;
 

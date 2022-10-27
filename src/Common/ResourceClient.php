@@ -85,7 +85,7 @@ class ResourceClient implements ResourceClientInterface
     public function getResource($query = [])
     {
         list($status, $response) = $this->httpClient->sendRequest(
-            'GET',
+            'POST',
             $this->getResourceName(),
             $query,
             ['Accept' => '*/*']
@@ -109,17 +109,6 @@ class ResourceClient implements ResourceClientInterface
      */
     public function getResources($query = [])
     {
-        $limit = 20;
-        $withCount = false;
-
-        if (null !== $limit) {
-            $query['limit'] = $limit;
-        }
-
-        if (null !== $withCount) {
-            $query['with_count'] = $withCount;
-        }
-
         return $this->getResource($query);
     }
 

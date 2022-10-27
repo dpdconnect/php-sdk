@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\PrintOptionsInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\PrintOptionsInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 

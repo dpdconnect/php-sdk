@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder\Contact;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\Contact\AddressInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\Contact\AddressInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 

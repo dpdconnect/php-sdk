@@ -20,7 +20,7 @@ use DpdConnect\Sdk\Resources\Token;
  */
 class Client
 {
-    const ENDPOINT = 'https://api.dpdconnect.nl';
+    const ENDPOINT = 'https://api.dpd.ro/v1';
 
     const CLIENT_VERSION = '1.0.4';
 

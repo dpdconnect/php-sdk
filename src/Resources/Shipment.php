@@ -12,6 +12,7 @@ use DpdConnect\Sdk\Model\Response\ShipmentResponseParser;
 use DpdConnect\Sdk\Objects\Response\ShipmentResponseCollection;
 use Exception;
 use InvalidArgumentException;
+use DpdConnect\Sdk\Objects\Response\CreateShipment\LabelInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -27,18 +28,12 @@ class Shipment extends BaseResource
     }
 
     /**
-     * @param bool $async
      *
      * @return string
      */
-    protected function getUrl($async = false)
+    protected function getUrl()
     {
-        if (true === $async) {
-            return 'api/connect/v1/shipment/async';
-        }
-
-        return 'api/connect/v1/shipment';
-
+        return 'shipment';
     }
 
     /**
@@ -58,28 +53,12 @@ class Shipment extends BaseResource
         return $this->resourceClient->createResource($query, $object);
     }
 
-    /**
-     * @param       $object
-     * @param array $query
-     *
-     * @return ResourceClient|int
-     */
-    public function createAsync($object, $query = [])
-    {
-        if (is_null($object)) {
-            throw new InvalidArgumentException('No shipment object given.');
-        }
-
-        $this->resourceClient->setResourceName($this->getUrl(true));
-
-        return $this->resourceClient->createResource($query, $object);
-    }
-
-    /**
-     * @param ShipmentOrderInterface[] $shipmentOrders
-     *
-     * @return ShipmentLabelInterface[]
-     */
+	/**
+	 * @param  ShipmentOrderInterface[]  $shipmentOrders
+	 *
+	 * @return ShipmentLabelInterface[]
+	 * @throws DpdException
+	 */
     public function createLabels(array $shipmentOrders)
     {
         $orders = [];
@@ -99,8 +78,8 @@ class Shipment extends BaseResource
     /**
      * @param ShipmentOrderInterface $shipmentOrder
      *
-     * @return ResourceClient|ShipmentResponseCollection|int
-     */
+     * @return ShipmentResponseCollection
+	 */
     public function createShipmentOrder($shipmentOrder)
     {
         $this->resourceClient->setResourceName($this->getUrl());
@@ -119,8 +98,8 @@ class Shipment extends BaseResource
     /**
      * @param ShipmentOrderInterface $shipmentOrder
      *
-     * @return ResourceClient|ShipmentResponseCollection|int
-     */
+     * @return ShipmentResponseCollection
+	 */
     public function createShipmentOrderAsync($shipmentOrder)
     {
         $this->resourceClient->setResourceName($this->getUrl(true));
@@ -136,23 +115,27 @@ class Shipment extends BaseResource
         return $response;
     }
 
-    /**
-     * @param ShipmentOrderInterface[] $shipmentOrders
-     *
-     * @return ShipmentLabelInterface[]
-     */
-    public function createShipmentOrders(array $shipmentOrders, $async = true)
+	/**
+	 * @param  array  $shipmentOrders
+	 * @param         $async
+	 *
+	 * @return LabelInterface[]
+	 * @throws DpdException
+	 * @throws Exception
+	 */
+	public function createShipmentOrders(array $shipmentOrders, $async = true)
     {
         $hipmentOrderRequest = RequestMapper::mapShipmentOrderRequest($shipmentOrders, $async);
 
         try {
-            $this->resourceClient->setResourceName($this->getUrl($async));
+            $this->resourceClient->setResourceName($this->getUrl());
             $response = $this->resourceClient->createResource([], $hipmentOrderRequest);
         } catch (Exception $e) {
             throw $this->setErrorByException($e);
         }
 
-        return ShipmentResponseParser::parseShipmentResponse($response);
+		/** @var TYPE_NAME $response */
+		return ShipmentResponseParser::parseShipmentResponse($response);
     }
 
     /**
@@ -186,9 +169,11 @@ class Shipment extends BaseResource
         return $response;
     }
 
-    /**
-     * @param $dpdConnectException
-     */
+	/**
+	 * @param $dpdConnectException
+	 *
+	 * @return DpdException
+	 */
     private function setErrorByException($dpdConnectException)
     {
         if ($dpdConnectException instanceof DpdException) {

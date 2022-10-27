@@ -2,7 +2,7 @@
 
 namespace DpdConnect\Sdk\Objects\ShipmentOrder\Shipment;
 
-use DpdConnect\Sdk\Api\Data\ShipmentOrder\Shipment\CashOnDeliveryInterface;
+use DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs\Shipment\CashOnDeliveryInterface;
 use DpdConnect\Sdk\Objects\BaseObject;
 use JsonSerializable;
 
