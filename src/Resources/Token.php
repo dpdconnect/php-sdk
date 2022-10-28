@@ -29,6 +29,7 @@ class Token implements CacheableInterface
      */
     public function __construct($httpClient)
     {
+        $this->cacheWrapper = new CacheWrapper();
         $this->httpClient = $httpClient;
     }
 
