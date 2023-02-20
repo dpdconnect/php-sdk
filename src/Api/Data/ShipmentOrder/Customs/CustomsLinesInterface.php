@@ -1,6 +1,6 @@
 <?php
 
-namespace DpdConnect\Sdk\Api\Data\ShipmentOrder;
+namespace DpdConnect\Sdk\Api\Data\ShipmentOrder\Customs;
 
 /**
  * Interface CustomsLinesInterface
