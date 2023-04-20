@@ -87,7 +87,7 @@ class AuthenticatedHttpClient
                 );
                 $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
             } catch (AuthenticateException $exception) {
-                $response = [];
+                throw new DpdException('Error response from DPD. '.$exception->getMessage(), $exception->getCode(), $exception);
             }
 
         }
