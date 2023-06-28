@@ -18,6 +18,8 @@ class Authentication implements AuthenticationResourceInterface
 {
     const RESOURCE_URI_AUTH = 'auth/login';
 
+    private $httpClient;
+
     /**
      * @param HttpClient $HttpClient
      */
