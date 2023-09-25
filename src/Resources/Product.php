@@ -28,7 +28,9 @@ class Product extends BaseResource
         $this->resourceClient->setResourceName('api/connect/v1/available-products');
         try {
             $products = $this->resourceClient->getResources($query);
-
+            if (!$products) {
+                return [];
+            }
             $this->cacheWrapper->storeCachedList($products, $query);
             return $products;
         } catch (DpdException $e) {

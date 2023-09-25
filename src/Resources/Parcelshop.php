@@ -28,12 +28,15 @@ class Parcelshop extends BaseResource
     /**
      * @param array $query
      *
-     * @return Parcelshop
+     * @return \DpdConnect\Sdk\Objects\Parcelshop[]
      */
     public function getList($query = [])
     {
         $this->resourceClient->setResourceName('api/connect/v1/parcelshop');
-
-        return $this->resourceClient->getResources($query);
+        $result = $this->resourceClient->getResources($query);
+        if (!$result) {
+            return [];
+        }
+        return $result;
     }
 }

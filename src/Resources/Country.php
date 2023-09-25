@@ -24,6 +24,11 @@ class Country extends BaseResource
 
         $this->resourceClient->setResourceName('api/connect/v1/countries');
         $countries = $this->resourceClient->getResources($query);
+
+        if (!$countries) {
+            return [];
+        }
+
         $this->cacheWrapper->storeCachedList($countries, $query);
 
         return $countries;
