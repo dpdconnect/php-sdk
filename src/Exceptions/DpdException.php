@@ -13,7 +13,7 @@ use Exception;
 class DpdException extends Exception
 {
     /**
-     * @var
+     * @var mixed
      */
     private $errorDetails;
 

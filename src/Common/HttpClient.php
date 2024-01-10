@@ -141,7 +141,7 @@ class HttpClient implements HttpClientInterface
      */
     public function getRequestUrl($resourceName, $query)
     {
-        if ($this->endpoint == NULL || $this->endpoint == "") {
+        if ($this->endpoint == null || $this->endpoint == "") {
             $this->endpoint = Client::ENDPOINT;
         }
 
@@ -271,13 +271,22 @@ class HttpClient implements HttpClientInterface
     /**
      * @return string
      */
-    private function getPhpVersion()
+    public function getPhpVersion()
     {
         if (!defined('PHP_VERSION_ID')) {
-            $version = explode('.', PHP_VERSION);
-            define('PHP_VERSION_ID', $version[0] * 10000 + $version[1] * 100 + $version[2]);
+            define('PHP_VERSION_ID', $this->buildPhpVersion());
         }
 
         return 'PHP/'.PHP_VERSION_ID;
+    }
+
+    public function buildPhpVersion()
+    {
+        $version = explode('.', PHP_VERSION);
+        $major = (int)$version[0];
+        $minor = (int)$version[1];
+        $patch = (int)$version[2];
+
+        return $major * 10000 + $minor * 100 + $patch;
     }
 }

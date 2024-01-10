@@ -66,7 +66,6 @@ class AuthenticatedHttpClient
 
             $response = $this->basicHttpClient->sendRequest($httpMethod, $resourceName, $query, $headers, $body);
         } catch (AuthenticateException $e) {
-
             try {
                 $token = $this->authenticationResource->authenticateByPassword(
                     $this->authentication->getUsername(),
@@ -89,7 +88,6 @@ class AuthenticatedHttpClient
             } catch (AuthenticateException $exception) {
                 $response = [];
             }
-
         }
 
         return $response;

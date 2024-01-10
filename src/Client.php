@@ -24,7 +24,7 @@ class Client
 {
     const ENDPOINT = 'https://api.dpdconnect.nl';
 
-    const CLIENT_VERSION = '1.0.4';
+    const CLIENT_VERSION = '1.0.5';
 
     /**
      * @var string
@@ -177,7 +177,7 @@ class Client
     public function setCacheCallable($cache)
     {
         foreach ($this as $prop) {
-            if($prop instanceof CacheableInterface) {
+            if ($prop instanceof CacheableInterface) {
                 $prop->setCacheWrapper(new CacheWrapper($cache));
             }
         }
