@@ -11,6 +11,8 @@ use JsonSerializable;
  */
 class BaseObject implements JsonSerializable
 {
+    protected $dynamicProperties = [];
+
     /**
      * BaseObject constructor.
      *
@@ -18,11 +20,50 @@ class BaseObject implements JsonSerializable
      */
     public function __construct(array $data = [])
     {
-        if (count($data) > 0) {
-            foreach ($data as $key => $value) {
-                $this->{$key} = $value;
-            }
+        if (count($data) === 0) {
+            return;
         }
+
+        foreach ($data as $key => $value) {
+            if(property_exists($this, $key)) {
+                $this->$key = $value;
+                continue;
+            }
+            $this->dynamicProperties[$key] = $value;
+        }
+    }
+
+    public function __call($key, $arguments)
+    {
+        if(strpos($key, 'get') === 0) {
+            $key = lcfirst(substr($key, 3));
+        }
+//        elseif (strpos($key, 'set') === 0) {
+//            $key = lcfirst(substr($key, 3));
+//        }
+
+        if(property_exists($this, $key)) {
+            return $this->$key;
+        }
+
+        if (array_key_exists($key, $this->dynamicProperties)) {
+            return $this->dynamicProperties[$key];
+        }
+
+        return null;
+    }
+
+    public function __get($key)
+    {
+        if(property_exists($this, $key)) {
+            return $this->$key;
+        }
+
+        if (array_key_exists($key, $this->dynamicProperties)) {
+            return $this->dynamicProperties[$key];
+        }
+
+        return null;
     }
 
     /**
@@ -35,7 +76,7 @@ class BaseObject implements JsonSerializable
         if ($object) {
             foreach ($object as $key => $value) {
                 if (property_exists($this, $key)) {
-                    $this->$key = $value;
+                    $this->dynamicProperties[$key] = $value;
                 }
             }
         }
@@ -49,11 +90,6 @@ class BaseObject implements JsonSerializable
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        $properties = get_object_vars($this);
-        $properties = array_filter($properties, static function ($value) {
-             return $value === false || !empty($value);
-        });
-
-        return $properties;
+        return array_filter($this->dynamicProperties);
     }
 }
