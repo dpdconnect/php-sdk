@@ -37,7 +37,7 @@ class MetaData extends BaseObject
     /**
      * @param string $webshopType
      *
-     * @return Metadata
+     * @return MetaData
      */
     public function setWebshopType($webshopType)
     {
@@ -57,7 +57,7 @@ class MetaData extends BaseObject
     /**
      * @param string $webshopVersion
      *
-     * @return Metadata
+     * @return MetaData
      */
     public function setWebshopVersion($webshopVersion)
     {
@@ -77,7 +77,7 @@ class MetaData extends BaseObject
     /**
      * @param string $pluginVersion
      *
-     * @return Metadata
+     * @return MetaData
      */
     public function setPluginVersion($pluginVersion)
     {

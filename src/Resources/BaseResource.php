@@ -36,8 +36,7 @@ class BaseResource implements CacheableInterface
      */
     public function __construct(
         $resourceClient
-    )
-    {
+    ) {
         $this->resourceClient = $resourceClient;
     }
 

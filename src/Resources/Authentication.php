@@ -18,9 +18,8 @@ class Authentication implements AuthenticationResourceInterface
 {
     const RESOURCE_URI_AUTH = 'auth/login';
 
-    /**
-     * @param HttpClient $HttpClient
-     */
+    private $httpClient;
+
     public function __construct($httpClient)
     {
         $this->httpClient = $httpClient;
@@ -63,10 +62,9 @@ class Authentication implements AuthenticationResourceInterface
                 json_encode($requestBody)
             );
             return $this->processRequest($response);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return [];
         }
-
     }
 
     /**

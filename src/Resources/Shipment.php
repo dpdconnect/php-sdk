@@ -30,7 +30,6 @@ class Shipment extends BaseResource
         }
 
         return 'api/connect/v1/shipment';
-
     }
 
     /**

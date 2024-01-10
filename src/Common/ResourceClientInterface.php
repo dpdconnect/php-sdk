@@ -40,7 +40,7 @@ interface ResourceClientInterface
     /**
      * Deletes a resource.
      *
-     * @param array $uriParameters URI parameters of the resource
+     * @param array $query URI parameters of the resource
      *
      * @return int Status code 204 indicating that the resource has been well deleted
      */

@@ -12,7 +12,7 @@ use InvalidArgumentException;
 class Parcel extends BaseResource
 {
     /**
-     * @param array $query
+     * @param mixed $id
      *
      * @return array
      * @throws DpdException

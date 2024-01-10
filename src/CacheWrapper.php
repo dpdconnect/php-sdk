@@ -28,13 +28,13 @@ class CacheWrapper
         // This is an hour
         $maxAge = 3600;
 
-        if($previous) {
+        if ($previous) {
             // This is a year;
             $maxAge = 31556926;
         }
 
         // Check if implementation supports own caching
-        if($this->cache instanceof CacheInterface) {
+        if ($this->cache instanceof CacheInterface) {
             return $this->cache->getCache($prefix .sha1(serialize($key)) . ($previous ? '_prev': ''));
         }
 
@@ -61,7 +61,7 @@ class CacheWrapper
         $year = 31556926;
 
         // Check if implementation supports own caching
-        if($this->cache instanceof CacheInterface) {
+        if ($this->cache instanceof CacheInterface) {
             $this->cache->setCache($prefix. sha1(serialize($key)), $data, $hour);
             $this->cache->setCache($prefix .sha1(serialize($key)). '_prev', $data, $year);
 

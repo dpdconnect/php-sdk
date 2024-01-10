@@ -26,7 +26,7 @@ class ClientBuilder implements ClientBuilderInterface
     protected $httpClient;
 
     /**
-     * @var array meta
+     * @var array
      */
     private $meta;
 
