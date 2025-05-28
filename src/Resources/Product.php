@@ -35,7 +35,7 @@ class Product extends BaseResource
             } else {
                 return [];
             }
-        } catch (DpdException $e) {
+        } catch (DpdException|\Exception $e) {
             $result = $this->cacheWrapper->getCachedList($query, true); //a year
 
             // So we had a failure save cache now for an hour
