@@ -43,12 +43,12 @@ class HttpClient implements HttpClientInterface
     /**
      * @var int
      */
-    private $timeout = 100;
+    private $timeout = 30;
 
     /**
      * @var int
      */
-    private $connectionTimeout = 100;
+    private $connectionTimeout = 2;
 
     /**
      * @var array
@@ -71,7 +71,7 @@ class HttpClient implements HttpClientInterface
      * @param int    $connectionTimeout >= 0
      * @param array  $headers
      */
-    public function __construct($endpoint, $timeout = 1000, $connectionTimeout = 1000, $headers = [])
+    public function __construct($endpoint, $timeout = 30, $connectionTimeout = 2, $headers = [])
     {
         $this->endpoint = $endpoint;
 
