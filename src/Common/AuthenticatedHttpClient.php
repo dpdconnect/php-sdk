@@ -72,6 +72,10 @@ class AuthenticatedHttpClient
                     $this->authentication->getPassword()
                 );
 
+                if (($token['token'] ?? null) === null) {
+                    throw new \AuthenticateException('Could not get token by username and password.');
+                }
+
                 $this->authentication
                     ->setJwtToken($token['token']);
                 if (is_callable($this->authentication->tokenUpdateCallback)) {
