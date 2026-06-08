@@ -248,7 +248,10 @@ class HttpClient implements HttpClientInterface
         }
 
         $responseStatus = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        curl_close($curl);
+
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($curl);
+        }
 
         // Split the header and body
         $parts = explode("\r\n\r\n", $response, 3);
