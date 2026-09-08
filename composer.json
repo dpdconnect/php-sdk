@@ -25,16 +25,16 @@
     }
   },
   "require": {
-    "php": "^5.5 || ^7.0 || ^8.0",
+    "php": ">=8.1",
     "ext-json": "*",
     "ext-curl": "*"
   },
   "require-dev": {
-    "symfony/yaml": "^4.2",
-    "donatj/mock-webserver": "^2.0",
-    "overtrue/phplint": "^1.1",
-    "squizlabs/php_codesniffer": "^3.0@dev",
-    "phpunit/phpunit": "^8.5"
+    "symfony/yaml": "^6.4 || ^7.0",
+    "donatj/mock-webserver": "^2.7",
+    "overtrue/phplint": "~9.6.0",
+    "squizlabs/php_codesniffer": "^3.13.6",
+    "phpunit/phpunit": "^10.5"
   },
   "config": {
     "bin-dir": "bin"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ruleset name="Slim application coding standard">
+    <description>Slim application coding standard</description>
+
+    <config name="installed_paths" value="vendor/squizlabs/php_codesniffer/CodeSniffer/Standards" />
+
+    <!-- Paths to check -->
+    <file>src</file>
+
+    <!-- display progress -->
+    <arg value="p"/>
+    <!-- use colors in output -->
+    <arg name="colors"/>
+
+    <!-- inherit rules from: -->
+    <rule ref="PSR2"/>s
+</ruleset>

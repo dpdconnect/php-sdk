@@ -57,7 +57,9 @@ class RequestMapper
      */
     private static function getSender($request)
     {
-        if (empty($request['shipper_contact_person_first_name']) || empty($request['shipper_contact_person_last_name'])) {
+        if (empty($request['shipper_contact_person_first_name'])
+            || empty($request['shipper_contact_person_last_name'])
+        ) {
             $name = $request['shipper_contact_person_name'];
         } else {
             $name = $request['shipper_contact_person_first_name']." ".$request['shipper_contact_person_last_name'];
@@ -105,7 +107,8 @@ class RequestMapper
             Receiver::class,
             [
                 'companyname' => $request['recipient_contact_company_name'],
-                'name1' => $request['recipient_contact_person_first_name']." ".$request['recipient_contact_person_last_name'],
+                'name1' => $request['recipient_contact_person_first_name']
+                    ." ".$request['recipient_contact_person_last_name'],
                 'street' => $request['recipient_address_street'],
                 'housenumber' => $request['recipient_address_street_number'],
                 'postalcode' => $request['recipient_address_postal_code'],
@@ -181,7 +184,9 @@ class RequestMapper
                 CustomsLine::class,
                 [
                     // description of the content
-                    'description' => $item['name'] ? $item['name'] : $request['params']['customs']['export_description'],
+                    'description' => $item['name']
+                        ? $item['name']
+                        : $request['params']['customs']['export_description'],
                     // customs tarif number
                     'harmonizedSystemCode' => (isset($item['customs_item_hs_code']) ? substr(
                         $item['customs_item_hs_code'],

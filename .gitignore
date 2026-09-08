@@ -6,3 +6,8 @@ phpunit.xml
 .php_cs.cache
 .idea
 .history
+
+.phpunit.cache/
+.phplint.cache/
+.phpunit.result.cache
+build/

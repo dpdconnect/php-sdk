@@ -25,7 +25,7 @@ class BaseObject implements JsonSerializable
         }
 
         foreach ($data as $key => $value) {
-            if(property_exists($this, $key)) {
+            if (property_exists($this, $key)) {
                 $this->$key = $value;
                 continue;
             }
@@ -35,14 +35,14 @@ class BaseObject implements JsonSerializable
 
     public function __call($key, $arguments)
     {
-        if(strpos($key, 'get') === 0) {
+        if (strpos($key, 'get') === 0) {
             $key = lcfirst(substr($key, 3));
         }
 //        elseif (strpos($key, 'set') === 0) {
 //            $key = lcfirst(substr($key, 3));
 //        }
 
-        if(property_exists($this, $key)) {
+        if (property_exists($this, $key)) {
             return $this->$key;
         }
 
@@ -55,7 +55,7 @@ class BaseObject implements JsonSerializable
 
     public function __get($key)
     {
-        if(property_exists($this, $key)) {
+        if (property_exists($this, $key)) {
             return $this->$key;
         }
 

@@ -29,19 +29,15 @@ class Product extends BaseResource
         try {
             $products = $this->resourceClient->getResources($query);
 
-            if (is_array($products)) {
-                $this->cacheWrapper->storeCachedList($products, $query);
-                return $products;
-            } else {
-                return [];
-            }
+            $this->cacheWrapper->storeCachedList($products, $query);
+            return $products;
         } catch (DpdException $e) {
             $result = $this->cacheWrapper->getCachedList($query, true); //a year
 
             // So we had a failure save cache now for an hour
             $this->cacheWrapper->storeCachedList($result, $query);
 
-            if ($result && is_array($result)) {
+            if ($result) {
                 return $result;
             }
             return [];

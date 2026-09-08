@@ -1,0 +1,9 @@
+# Explicit paths rather than `path: ./` with `exclude: vendor`: phplint 9.6 does not
+# apply the exclude to its own vendor fixtures, which ship a deliberate syntax error.
+path:
+  - src
+  - tests
+  - test.php
+jobs: 10
+extensions:
+  - php
