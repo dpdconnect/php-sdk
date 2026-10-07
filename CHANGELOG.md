@@ -5,6 +5,48 @@ All notable changes to the DPD Connect PHP SDK are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-10-07
+
+Restores PHP 7.4 as the supported floor, so that SDK 2.x can be adopted by the DPD
+PrestaShop module. This partially reverses the decision recorded under 2.0.0 below.
+
+The PrestaShop module supports PrestaShop 1.7 through 8.x and declares its own PHP floor
+of `>=7.4`, with a runtime guard that returns early below 70400. While the SDK required
+`>=8.1`, that module could not move to 2.x at all. It currently pins the SDK at `^1.1`,
+so nothing is broken today: the pin is what keeps 2.0.0 out. Lowering the floor makes the
+move possible; whether and when the module takes it is a separate decision.
+
+### Changed
+- **PHP requirement lowered from `>=8.1` to `>=7.4`.** No source change was needed:
+  all 91 files in `src/` already parse cleanly on PHP 7.4.33. The SDK uses no 8.x-only
+  syntax, and its only runtime requirements are `ext-json` and `ext-curl`. The `>=8.1`
+  in 2.0.0 was a policy choice, and its stated justification (matching the DPD Magento
+  and PrestaShop plugins) was wrong about PrestaShop: that module's floor is 7.4.
+  Verified on a real PrestaShop 1.7.8.11 install running on PHP 7.4.33, with the module
+  built the way its `prestashop17` CI job builds it but against this release: the SDK
+  autoloads, all eight API resources construct, and the cURL path returns a normal
+  `HttpException` rather than a fatal. PrestaShop 1.7 ships Symfony 3.4.49 and the
+  module sets `prepend-autoloader: false`, so the two vendor trees were the main risk;
+  the shop's Symfony version is unchanged after the module's autoloader is registered.
+  Storefront and back office both serve HTTP 200 with no fatals.
+- **What CI guarantees on 7.4 is narrower than on 8.1 and 8.5.** A new `lint-php74` job
+  runs `php -l` over `src/` on every commit, so a syntax error that would break a
+  PrestaShop install is caught. Behaviour is not covered: the test suite never runs on
+  7.4, because PHPUnit 10.5, overtrue/phplint 9.6 and symfony/yaml 6.4 all require 8.1
+  or higher and no release of them supports both ends. Runtime differences that are not
+  parse errors, string-to-number comparison semantics being the classic example, are
+  therefore not caught by CI on 7.4.
+- `Client::CLIENT_VERSION` bumped to `2.1.0`, matching the tag. This value is sent to
+  DPD as the `x-sdk-version` header, and `sync-to-github` refuses to publish when the
+  constant and the tag disagree.
+- `docs/ci-php-version-matrix.md` corrected and extended with the new job.
+
+### Note on PHP 7.4
+PHP 7.4 has been end of life since November 2022 and receives no security updates. It
+is supported here to keep the PrestaShop 1.7 module installable, not because it is a
+recommended runtime. New code in this SDK should still be reviewed against the 7.4
+floor until the PrestaShop module moves to a supported PHP version.
+
 ## [2.0.0] - 2026-09-07
 
 Annual maintenance release. The SDK now runs on current, supported PHP versions

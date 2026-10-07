@@ -4,7 +4,7 @@
 
 <h1>DPD Connect PHP SDK</h1>
 
-<img src="https://img.shields.io/badge/PHP-8.1%2B-8892BF?logo=php&logoColor=white" alt="PHP" />
+<img src="https://img.shields.io/badge/PHP-7.4%2B-8892BF?logo=php&logoColor=white" alt="PHP" />
 <img src="https://img.shields.io/badge/Type-Library-555555" alt="Type: Library" />
 <img src="https://img.shields.io/badge/License-OSL--3.0-4B8BBE" alt="License: OSL-3.0" />
 <img src="https://img.shields.io/badge/Version-1.0.5-brightgreen" alt="Version: 1.0.5" />
@@ -96,11 +96,16 @@ Create shipments, generate labels, find Parcelshop pickup points, and track parc
 
 | Requirement | Version |
 |-------------|---------|
-| PHP | `>=8.1` |
+| PHP | `>=7.4` |
 | ext-json | `*` |
 | ext-curl | `*` |
 
 No framework dependency. Works standalone in any PHP project.
+
+PHP 7.4 is supported so the DPD PrestaShop 1.7 module can install the SDK. It is end of
+life and gets no security updates, so use a supported PHP version where you can. CI
+checks the syntax of `src/` on 7.4 on every commit, but the test suite runs on 8.1 and
+8.5 only; see [`docs/ci-php-version-matrix.md`](docs/ci-php-version-matrix.md).
 
 ---
 
@@ -260,12 +265,14 @@ The project uses GitLab CI with four stages:
 | Stage | Jobs | Description |
 |-------|------|-------------|
 | `validate` | `composer-validate`, `composer-audit` | Validates `composer.json` and checks advisories |
-| `analyse` | `phpcs`, `phplint` | Static analysis; `phplint` runs on PHP 8.1 and 8.5 |
+| `analyse` | `phpcs`, `lint-php74`, `phplint` | Static analysis; `lint-php74` syntax-checks `src/` on PHP 7.4, `phplint` runs on PHP 8.1 and 8.5 |
 | `test` | `phpunit` | Full unit test suite on PHP 8.1 and 8.5 |
 | `sync` | `sync-to-github` | On a release tag only: mirrors to GitHub and publishes the release |
 
-`phplint` and `phpunit` run on both ends of the declared range: PHP 8.1 is the floor
-that actually gates, and 8.5 catches runtime deprecations no static check sees.
+`phplint` and `phpunit` run on PHP 8.1 and 8.5: 8.1 is the floor of the tested range,
+and 8.5 catches runtime deprecations no static check sees. The declared floor of 7.4 is
+covered separately by `lint-php74`, which is a syntax check only, because the test
+toolchain cannot run on 7.4.
 `sync-to-github` runs on release tags only; the job's own comments explain what it does
 and why.
 

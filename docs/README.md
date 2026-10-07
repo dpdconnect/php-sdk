@@ -16,9 +16,12 @@ A PHP SDK for integrating with the [DPD Connect API](https://api.dpdconnect.nl).
 
 | Requirement | Version |
 |-------------|---------|
-| PHP | `>=8.1` |
+| PHP | `>=7.4` |
 | ext-json | `*` |
 | ext-curl | `*` |
+
+PHP 7.4 is supported for the DPD PrestaShop 1.7 module. It is end of life and gets no
+security updates, so use a supported PHP version where you can.
 
 ## Installation
 

@@ -24,7 +24,7 @@ class Client
 {
     const ENDPOINT = 'https://api.dpdconnect.nl';
 
-    const CLIENT_VERSION = '2.0.0';
+    const CLIENT_VERSION = '2.1.0';
 
     /**
      * @var string

@@ -248,8 +248,11 @@ class HttpClient implements HttpClientInterface
         }
 
         $responseStatus = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        // No curl_close(): the CurlHandle is released when $curl goes out of scope.
-        // The function is a no-op since PHP 8.0 and deprecated as of PHP 8.5.
+        // No curl_close(): the handle is released when $curl goes out of scope at the end
+        // of this method. On PHP 8.0 and up that is a CurlHandle object and curl_close()
+        // is a no-op, deprecated as of 8.5. On the 7.4 floor it is a resource instead, so
+        // the call is not a no-op there, but it is still not needed: over 50k handles the
+        // memory and file-descriptor counts are identical with and without it.
 
         // Split the header and body
         $parts = explode("\r\n\r\n", $response, 3);
